@@ -1,0 +1,95 @@
+{
+  "runs_used": [
+    "RUN1",
+    "RUN2",
+    "RUN3",
+    "RUN4",
+    "RUN5"
+  ],
+  "skip_first_n_frames_per_run": 100,
+  "roles_A": {
+    "mglu_segids": [
+      "B",
+      "R"
+    ],
+    "arrestin_segids": [
+      "A"
+    ],
+    "core_segids": [
+      "A",
+      "B",
+      "R",
+      "S"
+    ]
+  },
+  "roles_B": {
+    "mglu_segids": [
+      "B",
+      "R"
+    ],
+    "arrestin_segids": [
+      "A",
+      "C"
+    ],
+    "core_segids": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "R",
+      "S"
+    ]
+  },
+  "bound_map_A": {
+    "A": "R"
+  },
+  "bound_map_B": {
+    "A": "R",
+    "C": "B"
+  },
+  "bound_scores_A": {
+    "A": {
+      "B": 6.087352827824086,
+      "R": 4.888044432573907
+    }
+  },
+  "bound_scores_B": {
+    "A": {
+      "B": 13.147517407813842,
+      "R": 5.160889745607091
+    },
+    "C": {
+      "B": 4.706886551367031,
+      "R": 9.980911411286876
+    }
+  },
+  "A_bound_arrestin": "A",
+  "A_bound_mglu": "R",
+  "A_unbound_mglu": "B",
+  "B_bound_arrestins": [
+    "A",
+    "C"
+  ],
+  "helicity_target_resids": [
+    665,
+    666,
+    667,
+    668,
+    669,
+    670
+  ],
+  "community_A": {
+    "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\AB_results\\01_system_A\\community_A_combined_frame0.pdb",
+    "n_communities": 7,
+    "n_nodes": 1616,
+    "n_edges": 159515,
+    "dccm_source": "combined_runs_mean"
+  },
+  "community_B": {
+    "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\AB_results\\02_system_B\\community_B_combined_frame0.pdb",
+    "n_communities": 7,
+    "n_nodes": 1616,
+    "n_edges": 137311,
+    "dccm_source": "combined_runs_mean"
+  }
+}

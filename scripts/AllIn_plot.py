@@ -35,19 +35,20 @@ class PlotBase:
 class RMSProfilePlotter(PlotBase):
     def _plot_profile(
         self,
-        amino_acid_numbers: Sequence[int] | np.ndarray,
+        x_values: Sequence[float] | np.ndarray,
         values: Sequence[float] | np.ndarray,
+        x_label: str,
         title: str,
         y_label: str,
         color: str,
         save_path: str | None = None,
     ) -> tuple[plt.Figure, plt.Axes]:
-        x = self._as_1d(amino_acid_numbers, "amino_acid_numbers")
+        x = self._as_1d(x_values, "x_values")
         y = self._as_1d(values, "values")
-        self._validate_same_length(x, y, "amino_acid_numbers", "values")
+        self._validate_same_length(x, y, "x_values", "values")
         fig, ax = plt.subplots(figsize=self.figsize)
         ax.plot(x, y, color=color, linewidth=1.4)
-        ax.set_xlabel("Amino Acid Number")
+        ax.set_xlabel(x_label)
         ax.set_ylabel(y_label)
         ax.set_title(title)
         ax.grid(alpha=0.3)
@@ -56,17 +57,33 @@ class RMSProfilePlotter(PlotBase):
 
     def plot_rmsd(
         self,
-        amino_acid_numbers: Sequence[int] | np.ndarray,
+        md_steps: Sequence[float] | np.ndarray,
         rmsd_values: Sequence[float] | np.ndarray,
-        title: str = "RMSD Profile",
+        title: str = "RMSD vs Molecular Dynamics Step",
         save_path: str | None = None,
     ) -> tuple[plt.Figure, plt.Axes]:
         return self._plot_profile(
-            amino_acid_numbers=amino_acid_numbers,
+            x_values=md_steps,
             values=rmsd_values,
+            x_label="Molecular Dynamics Step",
             title=title,
             y_label="RMSD, Å.",
             color="steelblue",
+            save_path=save_path,
+        )
+
+    def plot_rmsd_from_geometry_output(
+        self,
+        geometry_output: Mapping[str, Sequence[float] | np.ndarray],
+        title: str = "RMSD vs Molecular Dynamics Step",
+        save_path: str | None = None,
+    ) -> tuple[plt.Figure, plt.Axes]:
+        if "md_step" not in geometry_output or "rmsd" not in geometry_output:
+            raise ValueError("geometry_output must contain 'md_step' and 'rmsd'")
+        return self.plot_rmsd(
+            md_steps=geometry_output["md_step"],
+            rmsd_values=geometry_output["rmsd"],
+            title=title,
             save_path=save_path,
         )
 
@@ -78,8 +95,9 @@ class RMSProfilePlotter(PlotBase):
         save_path: str | None = None,
     ) -> tuple[plt.Figure, plt.Axes]:
         return self._plot_profile(
-            amino_acid_numbers=amino_acid_numbers,
+            x_values=amino_acid_numbers,
             values=rmsf_values,
+            x_label="Amino Acid Number",
             title=title,
             y_label="RMSF, Å.",
             color="indianred",
@@ -100,18 +118,18 @@ class RMSDDifferencePlotter(PlotBase):
 
     def plot_difference(
         self,
-        amino_acid_numbers: Sequence[int] | np.ndarray,
+        md_steps: Sequence[float] | np.ndarray,
         rmsd_values_a: Sequence[float] | np.ndarray,
         rmsd_values_b: Sequence[float] | np.ndarray,
-        title: str = "Absolute RMSD Difference Profile",
+        title: str = "Absolute RMSD Difference vs Molecular Dynamics Step",
         save_path: str | None = None,
     ) -> tuple[np.ndarray, plt.Figure, plt.Axes]:
         diff = self.calculate_absolute_difference(rmsd_values_a, rmsd_values_b)
-        x = self._as_1d(amino_acid_numbers, "amino_acid_numbers")
-        self._validate_same_length(x, diff, "amino_acid_numbers", "rmsd difference")
+        x = self._as_1d(md_steps, "md_steps")
+        self._validate_same_length(x, diff, "md_steps", "rmsd difference")
         fig, ax = plt.subplots(figsize=self.figsize)
         ax.plot(x, diff, color="darkorchid", linewidth=1.4, label="|Delta RMSD|")
-        ax.set_xlabel("Amino Acid Number")
+        ax.set_xlabel("Molecular Dynamics Step")
         ax.set_ylabel("|Delta RMSD|, Å.")
         ax.set_title(title)
         ax.legend()

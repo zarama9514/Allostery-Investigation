@@ -38,7 +38,7 @@ class RMSDAnalyzer(GeometryBase):
         groupselections: Sequence[str] | None = None,
         step: int = 1,
         skip_first_n_frames: int = 0,
-    ) -> np.ndarray:
+    ) -> dict[str, np.ndarray]:
         step = self._validate_step(step)
         skip_first_n_frames = self._validate_skip(skip_first_n_frames)
         universe = self._build_universe()
@@ -50,7 +50,20 @@ class RMSDAnalyzer(GeometryBase):
             groupselections=list(groupselections) if groupselections else None,
         )
         analyzer.run(start=skip_first_n_frames, step=step)
-        return analyzer.results.rmsd.copy()
+        values = analyzer.results.rmsd.copy()
+        if values.ndim != 2 or values.shape[1] < 3:
+            raise ValueError("Unexpected RMSD output format")
+        result: dict[str, np.ndarray] = {
+            "md_step": values[:, 0].astype(float),
+            "time_ps": values[:, 1].astype(float),
+            "rmsd": values[:, 2].astype(float),
+        }
+        if groupselections:
+            for idx, label in enumerate(groupselections):
+                col = 3 + idx
+                if col < values.shape[1]:
+                    result[f"rmsd_group_{label}"] = values[:, col].astype(float)
+        return result
 
 
 class RMSFAnalyzer(GeometryBase):
