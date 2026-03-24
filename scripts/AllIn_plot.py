@@ -1,5 +1,7 @@
 ﻿from __future__ import annotations
 
+import csv
+from pathlib import Path
 from typing import Mapping, Sequence
 
 import matplotlib
@@ -394,3 +396,66 @@ class DCCMPlotter(PlotBase):
             title=title,
             save_path=save_path,
         )
+
+
+class HydrogenBondPlotter(PlotBase):
+    @staticmethod
+    def _read_contacts_csv(csv_path: str) -> list[dict[str, object]]:
+        path = Path(csv_path)
+        if not path.exists():
+            raise FileNotFoundError(f"File not found: {path}")
+        rows: list[dict[str, object]] = []
+        with path.open("r", newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            for row in reader:
+                rows.append(dict(row))
+        return rows
+
+    @staticmethod
+    def _to_float(value: object, field_name: str) -> float:
+        try:
+            return float(value)
+        except Exception as exc:
+            raise ValueError(f"Cannot parse float field '{field_name}': {value}") from exc
+
+    def plot_top_contacts(
+        self,
+        contacts: Sequence[Mapping[str, object]] | None = None,
+        csv_path: str | None = None,
+        top_n: int = 15,
+        lifetime_field: str = "lifetime_ps",
+        label_field: str = "contact_residue_label",
+        title: str = "Top Protein-Protein H-Bond Contacts by Lifetime",
+        save_path: str | None = None,
+    ) -> tuple[list[dict[str, object]], plt.Figure, plt.Axes]:
+        if top_n < 1:
+            raise ValueError("top_n must be >= 1")
+        if contacts is None:
+            if not csv_path:
+                raise ValueError("Provide contacts or csv_path")
+            parsed = self._read_contacts_csv(csv_path)
+        else:
+            parsed = [dict(row) for row in contacts]
+        if not parsed:
+            raise ValueError("No contact rows available for plotting")
+        for row in parsed:
+            row[lifetime_field] = self._to_float(row.get(lifetime_field), lifetime_field)
+            row[label_field] = str(row.get(label_field, "NA"))
+        sorted_rows = sorted(parsed, key=lambda row: float(row[lifetime_field]), reverse=True)
+        top_rows = sorted_rows[:top_n]
+        top_rows_plot = list(reversed(top_rows))
+        labels = [str(row[label_field]) for row in top_rows_plot]
+        lifetimes = [float(row[lifetime_field]) for row in top_rows_plot]
+        height = max(self.figsize[1], 0.45 * len(top_rows_plot) + 1.5)
+        fig, ax = plt.subplots(figsize=(self.figsize[0], height))
+        positions = np.arange(len(top_rows_plot))
+        ax.barh(positions, lifetimes, color="darkcyan", alpha=0.9)
+        ax.set_yticks(positions)
+        ax.set_yticklabels(labels, fontsize=8)
+        ax.set_xlabel("Lifetime (ps)")
+        ax.set_ylabel("Residue Pair (Subunit)")
+        if title:
+            ax.set_title(title if top_n == 15 else f"Top {top_n} Protein-Protein H-Bond Contacts by Lifetime")
+        ax.grid(axis="x", alpha=0.3)
+        self._save(fig, save_path)
+        return top_rows, fig, ax
