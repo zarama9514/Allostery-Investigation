@@ -63,7 +63,7 @@ class RMSProfilePlotter(PlotBase):
             amino_acid_numbers=amino_acid_numbers,
             values=rmsd_values,
             title=title,
-            y_label="RMSD (Angstrom)",
+            y_label="RMSD, Å.",
             color="steelblue",
             save_path=save_path,
         )
@@ -79,7 +79,7 @@ class RMSProfilePlotter(PlotBase):
             amino_acid_numbers=amino_acid_numbers,
             values=rmsf_values,
             title=title,
-            y_label="RMSF (Angstrom)",
+            y_label="RMSF, Å.",
             color="indianred",
             save_path=save_path,
         )
@@ -110,7 +110,7 @@ class RMSDDifferencePlotter(PlotBase):
         fig, ax = plt.subplots(figsize=self.figsize)
         ax.plot(x, diff, color="darkorchid", linewidth=1.4, label="|Delta RMSD|")
         ax.set_xlabel("Amino Acid Number")
-        ax.set_ylabel("|Delta RMSD| (Angstrom)")
+        ax.set_ylabel("|Delta RMSD|, Å.")
         ax.set_title(title)
         ax.legend()
         ax.grid(alpha=0.3)
@@ -143,7 +143,7 @@ class RMSFDifferencePlotter(PlotBase):
         fig, ax = plt.subplots(figsize=self.figsize)
         ax.plot(x, diff, color="teal", linewidth=1.4, label="|Delta RMSF|")
         ax.set_xlabel("Amino Acid Number")
-        ax.set_ylabel("|Delta RMSF| (Angstrom)")
+        ax.set_ylabel("|Delta RMSF|, Å.")
         ax.set_title(title)
         ax.legend()
         ax.grid(alpha=0.3)
