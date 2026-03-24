@@ -16,6 +16,24 @@ class CommunityAnalyzer:
         self.dcd = dcd
 
     @staticmethod
+    def _validate_step(step: int) -> int:
+        if step < 1:
+            raise ValueError("step must be >= 1")
+        return step
+
+    @staticmethod
+    def _validate_skip(skip_first_n_frames: int) -> int:
+        if skip_first_n_frames < 0:
+            raise ValueError("skip_first_n_frames must be >= 0")
+        return skip_first_n_frames
+
+    @staticmethod
+    def _validate_frame_index(output_frame_index: int) -> int:
+        if output_frame_index < 0:
+            raise ValueError("output_frame_index must be >= 0")
+        return output_frame_index
+
+    @staticmethod
     def _graph_from_dccm(dccm: np.ndarray, threshold: float) -> nx.Graph:
         if threshold < 0:
             raise ValueError("threshold must be >= 0")
@@ -50,6 +68,9 @@ class CommunityAnalyzer:
         seed: int = 42,
         output_frame_index: int = 0,
     ) -> dict[str, int | str]:
+        step = self._validate_step(step)
+        skip_first_n_frames = self._validate_skip(skip_first_n_frames)
+        output_frame_index = self._validate_frame_index(output_frame_index)
         dccm_result = DCCMAnalyzer(psf1=self.psf, dcd1=self.dcd).calculate(
             selection1=selection,
             align_selection1=align_selection,

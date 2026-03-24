@@ -19,6 +19,7 @@ This repository contains code from user zarama9514.
 - Community analysis module based on DCCM correlations.
 - Takes `psf + dcd` and writes an output `.pdb` of frame 0 with all atoms.
 - Encodes protein community IDs in the `beta-factor` column for visualization.
+- Typical use: call `CommunityAnalyzer(...).run(output_pdb=...)` from your system-specific run script.
 
 `scripts/AllIn_psf_cleaner.py`
 - PSF cleanup helper for protein-only topology workflows.
