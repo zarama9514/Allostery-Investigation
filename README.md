@@ -13,20 +13,14 @@ This repository contains code from user zarama9514.
 `scripts/AllIn_psf_cleaner.py`
 - PSF cleanup helper for protein-only topology workflows.
 
-`scripts/AllIn_run_geometry_plots.py`
-- Main executable for running calculations and generating plots.
-
 `requierements/pyproject.toml`
 `requierements/uv.lock`
 `requierements/requirements.txt`
 - Dependency manifests for the project.
-
-`plots/`
-- Output folder for generated figures and helper PDB files.
 
 ## Executable Paths
 
 - Geometry/analysis module: `scripts/AllIn_geometry.py`
 - Plot module: `scripts/AllIn_plot.py`
 - PSF cleaner: `scripts/AllIn_psf_cleaner.py`
-- End-to-end plotting run: `scripts/AllIn_run_geometry_plots.py`
+- System-specific run scripts should be named by your internal system labels and added under `scripts/` when needed.
