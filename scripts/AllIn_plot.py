@@ -244,6 +244,7 @@ class DCCMPlotter(PlotBase):
         cmap: str = "RdBu_r",
         vmin: float = -1.0,
         vmax: float = 1.0,
+        colorbar_label: str = "Correlation",
         save_path: str | None = None,
     ) -> tuple[plt.Figure, plt.Axes]:
         matrix = self._validate_matrix(np.asarray(dccm, dtype=float))
@@ -263,7 +264,7 @@ class DCCMPlotter(PlotBase):
             origin="lower",
         )
         cbar = fig.colorbar(image, ax=ax, pad=0.02)
-        cbar.set_label("Correlation")
+        cbar.set_label(colorbar_label)
         x_tick_idx, x_tick_labels = self._build_residue_ticks(x)
         y_tick_idx, y_tick_labels = self._build_residue_ticks(y)
         ax.set_xticks(x_tick_idx)
@@ -306,6 +307,44 @@ class DCCMPlotter(PlotBase):
         self._save(fig, save_path)
         return fig, ax
 
+    def calculate_normalized_difference(
+        self,
+        dccm_a: Sequence[Sequence[float]] | np.ndarray,
+        dccm_b: Sequence[Sequence[float]] | np.ndarray,
+    ) -> np.ndarray:
+        a = self._validate_matrix(np.asarray(dccm_a, dtype=float))
+        b = self._validate_matrix(np.asarray(dccm_b, dtype=float))
+        if a.shape != b.shape:
+            raise ValueError("Both DCCM heatmaps must have the same shape")
+        return np.clip((a - b) / 2.0, -1.0, 1.0)
+
+    def plot_dccm_difference(
+        self,
+        dccm_a: Sequence[Sequence[float]] | np.ndarray,
+        dccm_b: Sequence[Sequence[float]] | np.ndarray,
+        x_resids: Sequence[int] | np.ndarray,
+        y_resids: Sequence[int] | np.ndarray,
+        x_chain_ranges: Sequence[Mapping[str, int | str]] | None = None,
+        y_chain_ranges: Sequence[Mapping[str, int | str]] | None = None,
+        title: str = "Normalized DCCM Difference Heatmap",
+        save_path: str | None = None,
+    ) -> tuple[np.ndarray, plt.Figure, plt.Axes]:
+        diff = self.calculate_normalized_difference(dccm_a, dccm_b)
+        fig, ax = self.plot_dccm(
+            dccm=diff,
+            x_resids=x_resids,
+            y_resids=y_resids,
+            x_chain_ranges=x_chain_ranges,
+            y_chain_ranges=y_chain_ranges,
+            title=title,
+            cmap="RdBu_r",
+            vmin=-1.0,
+            vmax=1.0,
+            colorbar_label="(H1 - H2) / 2",
+            save_path=save_path,
+        )
+        return diff, fig, ax
+
     def plot_from_community_output(
         self,
         community_output: Mapping[str, object],
@@ -322,6 +361,36 @@ class DCCMPlotter(PlotBase):
             y_resids=np.asarray(community_output["y_resids"], dtype=int),
             x_chain_ranges=community_output.get("x_chain_ranges"),
             y_chain_ranges=community_output.get("y_chain_ranges"),
+            title=title,
+            save_path=save_path,
+        )
+
+    def plot_difference_from_community_outputs(
+        self,
+        community_output_1: Mapping[str, object],
+        community_output_2: Mapping[str, object],
+        title: str = "Normalized DCCM Difference Heatmap",
+        save_path: str | None = None,
+    ) -> tuple[np.ndarray, plt.Figure, plt.Axes]:
+        required = ("dccm", "x_resids", "y_resids")
+        for key in required:
+            if key not in community_output_1 or key not in community_output_2:
+                raise ValueError(f"Both outputs must contain '{key}'")
+        x1 = np.asarray(community_output_1["x_resids"], dtype=int)
+        y1 = np.asarray(community_output_1["y_resids"], dtype=int)
+        x2 = np.asarray(community_output_2["x_resids"], dtype=int)
+        y2 = np.asarray(community_output_2["y_resids"], dtype=int)
+        if x1.shape != x2.shape or y1.shape != y2.shape:
+            raise ValueError("Both outputs must have matching residue axes")
+        if not np.array_equal(x1, x2) or not np.array_equal(y1, y2):
+            raise ValueError("Residue numbering must match between both outputs")
+        return self.plot_dccm_difference(
+            dccm_a=np.asarray(community_output_1["dccm"], dtype=float),
+            dccm_b=np.asarray(community_output_2["dccm"], dtype=float),
+            x_resids=x1,
+            y_resids=y1,
+            x_chain_ranges=community_output_1.get("x_chain_ranges"),
+            y_chain_ranges=community_output_1.get("y_chain_ranges"),
             title=title,
             save_path=save_path,
         )

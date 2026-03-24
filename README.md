@@ -9,6 +9,7 @@ This repository contains code from user zarama9514.
 `scripts/AllIn_plot.py`
 - Reusable plotting blocks for RMSD/RMSF/helicity.
 - Includes `|Delta RMSD|`, `|Delta RMSF|`, and DCCM heatmap plotting.
+- Supports normalized DCCM heatmap difference plotting as `(H1 - H2) / 2` with range `[-1, 1]`.
 
 `scripts/AllIn_DCCM.py`
 - DCCM analysis module for one pair (`psf1+dcd1` vs itself) or two pairs (`psf1+dcd1` vs `psf2+dcd2`).
