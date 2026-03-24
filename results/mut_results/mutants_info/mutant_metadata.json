@@ -1,0 +1,59 @@
+﻿[
+    {
+        "mutant":  "F670G",
+        "runs_used":  [
+                          "RUN1",
+                          "RUN2",
+                          "RUN3",
+                          "RUN4",
+                          "RUN5"
+                      ],
+        "skip_first_n_frames_per_run":  100,
+        "a_bound_mglu":  "R",
+        "a_unbound_mglu":  "B",
+        "mutant_bound_mglu":  "R",
+        "mutant_unbound_mglu":  "B",
+        "community_a_n_communities":  7,
+        "community_mutant_n_communities":  7,
+        "community_a_n_edges":  159515,
+        "community_mutant_n_edges":  155925
+    },
+    {
+        "mutant":  "I669G",
+        "runs_used":  [
+                          "RUN1",
+                          "RUN2",
+                          "RUN3",
+                          "RUN4",
+                          "RUN5"
+                      ],
+        "skip_first_n_frames_per_run":  100,
+        "a_bound_mglu":  "R",
+        "a_unbound_mglu":  "B",
+        "mutant_bound_mglu":  "R",
+        "mutant_unbound_mglu":  "B",
+        "community_a_n_communities":  7,
+        "community_mutant_n_communities":  6,
+        "community_a_n_edges":  159515,
+        "community_mutant_n_edges":  132929
+    },
+    {
+        "mutant":  "R668G",
+        "runs_used":  [
+                          "RUN1",
+                          "RUN2",
+                          "RUN3",
+                          "RUN4",
+                          "RUN5"
+                      ],
+        "skip_first_n_frames_per_run":  100,
+        "a_bound_mglu":  "R",
+        "a_unbound_mglu":  "B",
+        "mutant_bound_mglu":  "R",
+        "mutant_unbound_mglu":  "B",
+        "community_a_n_communities":  7,
+        "community_mutant_n_communities":  7,
+        "community_a_n_edges":  159515,
+        "community_mutant_n_edges":  131963
+    }
+]

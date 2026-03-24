@@ -1,0 +1,277 @@
+{
+  "a_psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\A\\step5_input_protein.psf",
+  "mut_root": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results",
+  "mutants_processed": [
+    {
+      "mutant": "F670G",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "skip_first_n_frames_per_run": 100,
+      "roles_A": {
+        "mglu_segids": [
+          "B",
+          "R"
+        ],
+        "arrestin_segids": [
+          "A"
+        ],
+        "core_segids": [
+          "A",
+          "B",
+          "R",
+          "S"
+        ]
+      },
+      "roles_mutant": {
+        "mglu_segids": [
+          "B",
+          "R"
+        ],
+        "arrestin_segids": [
+          "A"
+        ],
+        "core_segids": [
+          "A",
+          "B",
+          "R",
+          "S"
+        ]
+      },
+      "bound_map_A": {
+        "A": "R"
+      },
+      "bound_map_mutant": {
+        "A": "R"
+      },
+      "bound_scores_A": {
+        "A": {
+          "B": 6.087352827824086,
+          "R": 4.888044432573907
+        }
+      },
+      "bound_scores_mutant": {
+        "A": {
+          "B": 6.2895018926873,
+          "R": 4.838833344031882
+        }
+      },
+      "A_bound_arrestin": "A",
+      "A_bound_mglu": "R",
+      "A_unbound_mglu": "B",
+      "mutant_bound_arrestin": "A",
+      "mutant_bound_mglu": "R",
+      "mutant_unbound_mglu": "B",
+      "helicity_target_resids": [
+        665,
+        666,
+        667,
+        668,
+        669,
+        670
+      ],
+      "community_A": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\F670G\\06_community\\community_A_combined_frame0.pdb",
+        "n_communities": 7,
+        "n_nodes": 1616,
+        "n_edges": 159515,
+        "dccm_source": "combined_runs_mean"
+      },
+      "community_mutant": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\F670G\\06_community\\community_F670G_combined_frame0.pdb",
+        "n_communities": 7,
+        "n_nodes": 1616,
+        "n_edges": 155925,
+        "dccm_source": "combined_runs_mean"
+      }
+    },
+    {
+      "mutant": "I669G",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "skip_first_n_frames_per_run": 100,
+      "roles_A": {
+        "mglu_segids": [
+          "B",
+          "R"
+        ],
+        "arrestin_segids": [
+          "A"
+        ],
+        "core_segids": [
+          "A",
+          "B",
+          "R",
+          "S"
+        ]
+      },
+      "roles_mutant": {
+        "mglu_segids": [
+          "B",
+          "R"
+        ],
+        "arrestin_segids": [
+          "A"
+        ],
+        "core_segids": [
+          "A",
+          "B",
+          "R",
+          "S"
+        ]
+      },
+      "bound_map_A": {
+        "A": "R"
+      },
+      "bound_map_mutant": {
+        "A": "R"
+      },
+      "bound_scores_A": {
+        "A": {
+          "B": 6.087352827824086,
+          "R": 4.888044432573907
+        }
+      },
+      "bound_scores_mutant": {
+        "A": {
+          "B": 5.814335093185731,
+          "R": 5.05371787778534
+        }
+      },
+      "A_bound_arrestin": "A",
+      "A_bound_mglu": "R",
+      "A_unbound_mglu": "B",
+      "mutant_bound_arrestin": "A",
+      "mutant_bound_mglu": "R",
+      "mutant_unbound_mglu": "B",
+      "helicity_target_resids": [
+        665,
+        666,
+        667,
+        668,
+        669,
+        670
+      ],
+      "community_A": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\I669G\\06_community\\community_A_combined_frame0.pdb",
+        "n_communities": 7,
+        "n_nodes": 1616,
+        "n_edges": 159515,
+        "dccm_source": "combined_runs_mean"
+      },
+      "community_mutant": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\I669G\\06_community\\community_I669G_combined_frame0.pdb",
+        "n_communities": 6,
+        "n_nodes": 1616,
+        "n_edges": 132929,
+        "dccm_source": "combined_runs_mean"
+      }
+    },
+    {
+      "mutant": "R668G",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "skip_first_n_frames_per_run": 100,
+      "roles_A": {
+        "mglu_segids": [
+          "B",
+          "R"
+        ],
+        "arrestin_segids": [
+          "A"
+        ],
+        "core_segids": [
+          "A",
+          "B",
+          "R",
+          "S"
+        ]
+      },
+      "roles_mutant": {
+        "mglu_segids": [
+          "B",
+          "R"
+        ],
+        "arrestin_segids": [
+          "A"
+        ],
+        "core_segids": [
+          "A",
+          "B",
+          "R",
+          "S"
+        ]
+      },
+      "bound_map_A": {
+        "A": "R"
+      },
+      "bound_map_mutant": {
+        "A": "R"
+      },
+      "bound_scores_A": {
+        "A": {
+          "B": 6.087352827824086,
+          "R": 4.888044432573907
+        }
+      },
+      "bound_scores_mutant": {
+        "A": {
+          "B": 5.967092538805529,
+          "R": 4.940934809222211
+        }
+      },
+      "A_bound_arrestin": "A",
+      "A_bound_mglu": "R",
+      "A_unbound_mglu": "B",
+      "mutant_bound_arrestin": "A",
+      "mutant_bound_mglu": "R",
+      "mutant_unbound_mglu": "B",
+      "helicity_target_resids": [
+        665,
+        666,
+        667,
+        668,
+        669,
+        670
+      ],
+      "community_A": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\R668G\\06_community\\community_A_combined_frame0.pdb",
+        "n_communities": 7,
+        "n_nodes": 1616,
+        "n_edges": 159515,
+        "dccm_source": "combined_runs_mean"
+      },
+      "community_mutant": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\R668G\\06_community\\community_R668G_combined_frame0.pdb",
+        "n_communities": 7,
+        "n_nodes": 1616,
+        "n_edges": 131963,
+        "dccm_source": "combined_runs_mean"
+      }
+    }
+  ],
+  "mutants_failed": [],
+  "skip_first_n_frames_per_run": 100,
+  "helicity_target_resids": [
+    665,
+    666,
+    667,
+    668,
+    669,
+    670
+  ]
+}
