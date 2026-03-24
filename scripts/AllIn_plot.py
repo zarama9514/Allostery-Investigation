@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 from typing import Mapping, Sequence
 
@@ -194,6 +194,134 @@ class HelicityPlotter(PlotBase):
         return self.plot(
             md_steps=geometry_output["frame"],
             helicity_series=series,
+            title=title,
+            save_path=save_path,
+        )
+
+
+class DCCMPlotter(PlotBase):
+    @staticmethod
+    def _validate_matrix(dccm: np.ndarray) -> np.ndarray:
+        arr = np.asarray(dccm, dtype=float)
+        if arr.ndim != 2:
+            raise ValueError("dccm must be a 2D matrix")
+        if arr.size == 0:
+            raise ValueError("dccm is empty")
+        return arr
+
+    @staticmethod
+    def _build_residue_ticks(resids: np.ndarray, max_ticks: int = 12) -> tuple[np.ndarray, list[str]]:
+        if resids.size <= max_ticks:
+            idx = np.arange(resids.size)
+        else:
+            step = max(1, resids.size // max_ticks)
+            idx = np.arange(0, resids.size, step)
+            if idx[-1] != resids.size - 1:
+                idx = np.append(idx, resids.size - 1)
+        labels = [str(int(resids[i])) for i in idx]
+        return idx, labels
+
+    @staticmethod
+    def _chain_map_text(chain_ranges: Sequence[Mapping[str, int | str]], axis_name: str) -> str:
+        if not chain_ranges:
+            return f"{axis_name}: no chain metadata"
+        parts: list[str] = []
+        for row in chain_ranges:
+            segid = str(row["segid"])
+            start_resid = int(row["start_resid"])
+            end_resid = int(row["end_resid"])
+            parts.append(f"{segid}:{start_resid}-{end_resid}")
+        return f"{axis_name}: " + "; ".join(parts)
+
+    def plot_dccm(
+        self,
+        dccm: Sequence[Sequence[float]] | np.ndarray,
+        x_resids: Sequence[int] | np.ndarray,
+        y_resids: Sequence[int] | np.ndarray,
+        x_chain_ranges: Sequence[Mapping[str, int | str]] | None = None,
+        y_chain_ranges: Sequence[Mapping[str, int | str]] | None = None,
+        title: str = "DCCM Heatmap",
+        cmap: str = "RdBu_r",
+        vmin: float = -1.0,
+        vmax: float = 1.0,
+        save_path: str | None = None,
+    ) -> tuple[plt.Figure, plt.Axes]:
+        matrix = self._validate_matrix(np.asarray(dccm, dtype=float))
+        x = self._as_1d(x_resids, "x_resids").astype(int)
+        y = self._as_1d(y_resids, "y_resids").astype(int)
+        if matrix.shape[1] != x.size:
+            raise ValueError("dccm columns must match x_resids length")
+        if matrix.shape[0] != y.size:
+            raise ValueError("dccm rows must match y_resids length")
+        fig, ax = plt.subplots(figsize=self.figsize, constrained_layout=True)
+        image = ax.imshow(
+            matrix,
+            cmap=cmap,
+            vmin=vmin,
+            vmax=vmax,
+            aspect="auto",
+            origin="lower",
+        )
+        cbar = fig.colorbar(image, ax=ax, pad=0.02)
+        cbar.set_label("Correlation")
+        x_tick_idx, x_tick_labels = self._build_residue_ticks(x)
+        y_tick_idx, y_tick_labels = self._build_residue_ticks(y)
+        ax.set_xticks(x_tick_idx)
+        ax.set_xticklabels(x_tick_labels, rotation=90)
+        ax.set_yticks(y_tick_idx)
+        ax.set_yticklabels(y_tick_labels)
+        ax.set_xlabel("Residue Number (X)")
+        ax.set_ylabel("Residue Number (Y)")
+        ax.set_title(title)
+        if x_chain_ranges:
+            for row in x_chain_ranges[:-1]:
+                ax.axvline(int(row["end_idx"]) + 0.5, color="black", linewidth=0.5, alpha=0.6)
+            x_centers = [
+                (int(row["start_idx"]) + int(row["end_idx"])) / 2.0
+                for row in x_chain_ranges
+            ]
+            x_labels = [str(row["segid"]) for row in x_chain_ranges]
+            top_ax = ax.twiny()
+            top_ax.set_xlim(ax.get_xlim())
+            top_ax.set_xticks(x_centers)
+            top_ax.set_xticklabels(x_labels, rotation=90, fontsize=8)
+            top_ax.set_xlabel("Chain (X)")
+        if y_chain_ranges:
+            for row in y_chain_ranges[:-1]:
+                ax.axhline(int(row["end_idx"]) + 0.5, color="black", linewidth=0.5, alpha=0.6)
+            y_centers = [
+                (int(row["start_idx"]) + int(row["end_idx"])) / 2.0
+                for row in y_chain_ranges
+            ]
+            y_labels = [str(row["segid"]) for row in y_chain_ranges]
+            right_ax = ax.twinx()
+            right_ax.set_ylim(ax.get_ylim())
+            right_ax.set_yticks(y_centers)
+            right_ax.set_yticklabels(y_labels, fontsize=8)
+            right_ax.set_ylabel("Chain (Y)")
+        if x_chain_ranges or y_chain_ranges:
+            x_map = self._chain_map_text(x_chain_ranges or [], "X")
+            y_map = self._chain_map_text(y_chain_ranges or [], "Y")
+            fig.text(0.5, -0.02, f"{x_map}\n{y_map}", ha="center", va="top", fontsize=8)
+        self._save(fig, save_path)
+        return fig, ax
+
+    def plot_from_community_output(
+        self,
+        community_output: Mapping[str, object],
+        title: str = "DCCM Heatmap",
+        save_path: str | None = None,
+    ) -> tuple[plt.Figure, plt.Axes]:
+        required = ("dccm", "x_resids", "y_resids")
+        for key in required:
+            if key not in community_output:
+                raise ValueError(f"community_output must contain '{key}'")
+        return self.plot_dccm(
+            dccm=np.asarray(community_output["dccm"], dtype=float),
+            x_resids=np.asarray(community_output["x_resids"], dtype=int),
+            y_resids=np.asarray(community_output["y_resids"], dtype=int),
+            x_chain_ranges=community_output.get("x_chain_ranges"),
+            y_chain_ranges=community_output.get("y_chain_ranges"),
             title=title,
             save_path=save_path,
         )
