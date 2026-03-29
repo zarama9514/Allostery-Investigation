@@ -152,6 +152,11 @@ This repository contains code from user zarama9514.
   - `delta_mean_sasa_A_minus_mutant.png`
 - `delta_mean_sasa_A_minus_mutant.csv` stores signed deltas `A - mutant` for mean and median SASA.
 - `summary.json` stores system, pair, run, and output-path metadata for the whole phospho-tail coupling block.
+- `explanation/`
+  - `README.md`: written interpretation of how the phospho-tail results agree or disagree with the paper.
+  - `key_site_metrics.csv`: compact comparison table for pS857, pS859, pT860, and total phospho-tail SASA.
+  - `phospho_key_site_summary.png`: summary heatmap of SASA, tail-contact occupancy, and salt-bridge occupancy.
+  - `A_minus_mutants_signed_delta_sasa.png`: signed `A - mutant` mean SASA comparison for the key phosphosites.
 
 ## Executable Paths
 
@@ -162,6 +167,7 @@ This repository contains code from user zarama9514.
 - Community module: `scripts/AllIn_community.py`
 - PSF cleaner: `scripts/AllIn_psf_cleaner.py`
 - Phospho coupling module: `scripts/AllIn_phospho_coupling.py`
+- Phospho explanation builder: `scripts/AllIn_build_phospho_explanation.py`
 - AB combined runner: `scripts/AllIn_run_AB_combined.py`
 - MUT vs A combined runner: `scripts/AllIn_run_MUT_vs_A_combined.py`
 - RMSF v2 runner: `scripts/AllIn_run_RMSF_v2.py`
