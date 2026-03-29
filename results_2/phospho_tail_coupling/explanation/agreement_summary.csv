@@ -1,0 +1,7 @@
+label,agreement,reason
+A:T_to_A,agree,"Low SASA and strong contact/salt occupancies at pS857, pS859, and pT860."
+B:T_to_A,agree,Matches A-like engaged pattern and remains strongly coupled at the three key phosphosites.
+B:L_to_C,disagree,Second tail is too exposed and too weakly engaged to support an equally strong symmetric 2:2 interpretation.
+F670G:T_to_A,partially agree,"pS857 remains compatible, but pS859/pT860 weaken relative to A."
+I669G:T_to_A,disagree,"Tail becomes more exposed and key phosphosite lifetimes drop strongly, especially at pS857."
+R668G:T_to_A,agree,pS857 and pS859 become more buried and remain strongly wired to arrestin; pT860 remains broadly supportive.

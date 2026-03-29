@@ -7,6 +7,8 @@ Paper anchor
 What to read first
 - `phospho_key_site_summary.png`: one-page heatmap view of SASA, best contact occupancy, and best salt-bridge occupancy.
 - `A_minus_mutants_signed_delta_sasa.png`: signed `A - mutant` SASA shifts for pS857, pS859, pT860, and TOTAL.
+- `agreement_summary.png`: compact agree / partially agree / disagree table by system.
+- `agreement_summary.csv`: the same classification in a machine-readable table.
 - `key_site_metrics.csv`: exact values used in this explanation.
 
 Interpretation

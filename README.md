@@ -157,6 +157,8 @@ This repository contains code from user zarama9514.
   - `key_site_metrics.csv`: compact comparison table for pS857, pS859, pT860, and total phospho-tail SASA.
   - `phospho_key_site_summary.png`: summary heatmap of SASA, tail-contact occupancy, and salt-bridge occupancy.
   - `A_minus_mutants_signed_delta_sasa.png`: signed `A - mutant` mean SASA comparison for the key phosphosites.
+  - `agreement_summary.csv`: compact `agree / partially agree / disagree` table by system.
+  - `agreement_summary.png`: visual summary table for the same classification.
 
 ## Executable Paths
 

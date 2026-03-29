@@ -193,6 +193,68 @@ def plot_a_minus_mutant_sasa(metrics: list[dict[str, object]], output_path: Path
     plt.close(fig)
 
 
+def classify_agreement(metrics: list[dict[str, object]]) -> list[dict[str, str]]:
+    ranking = {
+        "A:T_to_A": ("agree", "Low SASA and strong contact/salt occupancies at pS857, pS859, and pT860."),
+        "B:T_to_A": ("agree", "Matches A-like engaged pattern and remains strongly coupled at the three key phosphosites."),
+        "B:L_to_C": ("disagree", "Second tail is too exposed and too weakly engaged to support an equally strong symmetric 2:2 interpretation."),
+        "F670G:T_to_A": ("partially agree", "pS857 remains compatible, but pS859/pT860 weaken relative to A."),
+        "I669G:T_to_A": ("disagree", "Tail becomes more exposed and key phosphosite lifetimes drop strongly, especially at pS857."),
+        "R668G:T_to_A": ("agree", "pS857 and pS859 become more buried and remain strongly wired to arrestin; pT860 remains broadly supportive."),
+    }
+    rows: list[dict[str, str]] = []
+    for row in metrics:
+        label = str(row["label"])
+        category, reason = ranking[label]
+        rows.append(
+            {
+                "label": label,
+                "agreement": category,
+                "reason": reason,
+            }
+        )
+    return rows
+
+
+def write_agreement_csv(rows: list[dict[str, str]], output_path: Path) -> None:
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.DictWriter(handle, fieldnames=["label", "agreement", "reason"])
+        writer.writeheader()
+        for row in rows:
+            writer.writerow(row)
+
+
+def plot_agreement_table(rows: list[dict[str, str]], output_path: Path) -> None:
+    colors = {
+        "agree": "#2a9d8f",
+        "partially agree": "#e9c46a",
+        "disagree": "#c1121f",
+    }
+    labels = [row["label"] for row in rows]
+    categories = [row["agreement"] for row in rows]
+    values = np.arange(len(rows), dtype=float).reshape(-1, 1)
+    fig, ax = plt.subplots(figsize=(8, max(4, 0.85 * len(rows) + 1.5)))
+    ax.imshow(values * 0, aspect="auto", cmap="Greys", vmin=0, vmax=1)
+    ax.set_xticks([0])
+    ax.set_xticklabels(["Paper Agreement"])
+    ax.set_yticks(np.arange(len(rows)))
+    ax.set_yticklabels(labels)
+    for i, category in enumerate(categories):
+        rect = plt.Rectangle((-0.5, i - 0.5), 1.0, 1.0, facecolor=colors[category], edgecolor="white")
+        ax.add_patch(rect)
+        ax.text(0, i, category, ha="center", va="center", color="black", fontsize=10, fontweight="bold")
+    ax.set_title("Agreement With the Paper by System")
+    ax.set_xlim(-0.5, 0.5)
+    ax.set_ylim(len(rows) - 0.5, -0.5)
+    ax.tick_params(length=0)
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_path, dpi=300, bbox_inches="tight")
+    plt.close(fig)
+
+
 def build_interpretation(metrics: list[dict[str, object]]) -> str:
     row = {str(item["label"]): item for item in metrics}
 
@@ -216,6 +278,8 @@ def build_interpretation(metrics: list[dict[str, object]]) -> str:
     lines.append("What to read first")
     lines.append("- `phospho_key_site_summary.png`: one-page heatmap view of SASA, best contact occupancy, and best salt-bridge occupancy.")
     lines.append("- `A_minus_mutants_signed_delta_sasa.png`: signed `A - mutant` SASA shifts for pS857, pS859, pT860, and TOTAL.")
+    lines.append("- `agreement_summary.png`: compact agree / partially agree / disagree table by system.")
+    lines.append("- `agreement_summary.csv`: the same classification in a machine-readable table.")
     lines.append("- `key_site_metrics.csv`: exact values used in this explanation.")
     lines.append("")
     lines.append("Interpretation")
@@ -258,6 +322,9 @@ def run() -> None:
     write_metrics_csv(metrics, explanation_root / "key_site_metrics.csv")
     plot_summary_panels(metrics, explanation_root / "phospho_key_site_summary.png")
     plot_a_minus_mutant_sasa(metrics, explanation_root / "A_minus_mutants_signed_delta_sasa.png")
+    agreement = classify_agreement(metrics)
+    write_agreement_csv(agreement, explanation_root / "agreement_summary.csv")
+    plot_agreement_table(agreement, explanation_root / "agreement_summary.png")
     explanation = build_interpretation(metrics)
     (explanation_root / "README.md").write_text(explanation, encoding="utf-8")
 
