@@ -1,6 +1,6 @@
 {
-  "a_psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\A\\step5_input_protein.psf",
-  "mut_root": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results",
+  "a_psf": "Mika_project/results/A/step5_input_protein.psf",
+  "mut_root": "Mika_project/results",
   "mutants_processed": [
     {
       "mutant": "F670G",
@@ -75,14 +75,14 @@
         670
       ],
       "community_A": {
-        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\F670G\\06_community\\community_A_combined_frame0.pdb",
+        "output_pdb": "results/mut_results/F670G/06_community/community_A_combined_frame0.pdb",
         "n_communities": 7,
         "n_nodes": 1616,
         "n_edges": 159515,
         "dccm_source": "combined_runs_mean"
       },
       "community_mutant": {
-        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\F670G\\06_community\\community_F670G_combined_frame0.pdb",
+        "output_pdb": "results/mut_results/F670G/06_community/community_F670G_combined_frame0.pdb",
         "n_communities": 7,
         "n_nodes": 1616,
         "n_edges": 155925,
@@ -162,14 +162,14 @@
         670
       ],
       "community_A": {
-        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\I669G\\06_community\\community_A_combined_frame0.pdb",
+        "output_pdb": "results/mut_results/I669G/06_community/community_A_combined_frame0.pdb",
         "n_communities": 7,
         "n_nodes": 1616,
         "n_edges": 159515,
         "dccm_source": "combined_runs_mean"
       },
       "community_mutant": {
-        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\I669G\\06_community\\community_I669G_combined_frame0.pdb",
+        "output_pdb": "results/mut_results/I669G/06_community/community_I669G_combined_frame0.pdb",
         "n_communities": 6,
         "n_nodes": 1616,
         "n_edges": 132929,
@@ -249,14 +249,14 @@
         670
       ],
       "community_A": {
-        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\R668G\\06_community\\community_A_combined_frame0.pdb",
+        "output_pdb": "results/mut_results/R668G/06_community/community_A_combined_frame0.pdb",
         "n_communities": 7,
         "n_nodes": 1616,
         "n_edges": 159515,
         "dccm_source": "combined_runs_mean"
       },
       "community_mutant": {
-        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results\\mut_results\\R668G\\06_community\\community_R668G_combined_frame0.pdb",
+        "output_pdb": "results/mut_results/R668G/06_community/community_R668G_combined_frame0.pdb",
         "n_communities": 7,
         "n_nodes": 1616,
         "n_edges": 131963,

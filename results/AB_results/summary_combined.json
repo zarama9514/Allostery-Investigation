@@ -79,14 +79,14 @@
     670
   ],
   "community_A": {
-    "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\AB_results\\01_system_A\\community_A_combined_frame0.pdb",
+    "output_pdb": "results/AB_results/01_system_A/community_A_combined_frame0.pdb",
     "n_communities": 7,
     "n_nodes": 1616,
     "n_edges": 159515,
     "dccm_source": "combined_runs_mean"
   },
   "community_B": {
-    "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\AB_results\\02_system_B\\community_B_combined_frame0.pdb",
+    "output_pdb": "results/AB_results/02_system_B/community_B_combined_frame0.pdb",
     "n_communities": 7,
     "n_nodes": 1616,
     "n_edges": 137311,

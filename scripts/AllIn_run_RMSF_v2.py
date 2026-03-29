@@ -30,7 +30,7 @@ COMMON_DEFINITIONS = [
 
 def parse_args() -> argparse.Namespace:
     project_root = Path(__file__).resolve().parents[1]
-    default_results = Path(r"C:\Users\Daniil\IT_projects\Mika_project\results")
+    default_results = project_root.parent / "Mika_project" / "results"
     parser = argparse.ArgumentParser()
     parser.add_argument("--a-psf", default=str(default_results / "A" / "step5_input_protein.psf"))
     parser.add_argument("--a-dir", default=str(default_results / "A"))
@@ -148,6 +148,8 @@ def render_comparison(
 
 def run() -> None:
     args = parse_args()
+    project_root = Path(__file__).resolve().parents[1]
+    workspace_root = project_root.parent
     results_root = Path(args.results_root)
     results_root.mkdir(parents=True, exist_ok=True)
     skip = int(args.skip_first_n_frames)
@@ -216,7 +218,12 @@ def run() -> None:
             "outputs": render_comparison(out_dir, mutant_name, a_mut, mut, annotation_blocks, plotter, diff_plotter),
         }
 
-    save_json(results_root / "summary.json", summary)
+    save_json(
+        results_root / "summary.json",
+        summary,
+        repo_root=project_root,
+        workspace_root=workspace_root,
+    )
     print(f"RMSF_v2 completed: {results_root}")
 
 

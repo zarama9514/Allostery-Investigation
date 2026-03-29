@@ -37,9 +37,13 @@ def progress_iter(iterable, desc: str, unit: str = "item", leave: bool = False):
     return tqdm(iterable, desc=desc, unit=unit, dynamic_ncols=True, mininterval=1.0, leave=leave)
 
 
+def default_workspace_results(project_root: Path) -> Path:
+    return project_root.parent / "Mika_project" / "results"
+
+
 def parse_args() -> argparse.Namespace:
     project_root = Path(__file__).resolve().parents[1]
-    default_results = Path(r"C:\Users\Daniil\IT_projects\Mika_project\results")
+    default_results = default_workspace_results(project_root)
     parser = argparse.ArgumentParser()
     parser.add_argument("--a-psf", default=str(default_results / "A" / "step5_input_protein.psf"))
     parser.add_argument("--b-psf", default=str(default_results / "B" / "B_step5_input_protein.psf"))
@@ -375,10 +379,62 @@ def aggregate_hbond_contacts(
     return contacts
 
 
-def save_json(path: Path, payload: Mapping[str, object]) -> None:
+def serialize_summary_path(path: Path, repo_root: Path | None = None, workspace_root: Path | None = None) -> str:
+    resolved = path.resolve()
+    bases = [repo_root.resolve()] if repo_root is not None else []
+    if workspace_root is not None:
+        bases.append(workspace_root.resolve())
+    for base in bases:
+        try:
+            relative = resolved.relative_to(base).as_posix()
+            if relative.startswith("AB_results/"):
+                return f"results/{relative}"
+            return relative
+        except ValueError:
+            continue
+    return path.name
+
+
+def normalize_summary_payload(
+    payload: object,
+    repo_root: Path | None = None,
+    workspace_root: Path | None = None,
+) -> object:
+    if isinstance(payload, Mapping):
+        return {
+            key: normalize_summary_payload(value, repo_root=repo_root, workspace_root=workspace_root)
+            for key, value in payload.items()
+        }
+    if isinstance(payload, list):
+        return [normalize_summary_payload(item, repo_root=repo_root, workspace_root=workspace_root) for item in payload]
+    if isinstance(payload, tuple):
+        return [normalize_summary_payload(item, repo_root=repo_root, workspace_root=workspace_root) for item in payload]
+    if isinstance(payload, Path):
+        return serialize_summary_path(payload, repo_root=repo_root, workspace_root=workspace_root)
+    if isinstance(payload, str):
+        looks_like_path = "\\" in payload or "/" in payload or (len(payload) > 1 and payload[1] == ":")
+        if looks_like_path:
+            path = Path(payload)
+            if path.is_absolute():
+                return serialize_summary_path(path, repo_root=repo_root, workspace_root=workspace_root)
+            return payload.replace("\\", "/")
+    return payload
+
+
+def save_json(
+    path: Path,
+    payload: Mapping[str, object],
+    repo_root: Path | None = None,
+    workspace_root: Path | None = None,
+) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8") as handle:
-        json.dump(payload, handle, ensure_ascii=False, indent=2)
+        json.dump(
+            normalize_summary_payload(payload, repo_root=repo_root, workspace_root=workspace_root),
+            handle,
+            ensure_ascii=False,
+            indent=2,
+        )
 
 
 def parse_resids_csv(text: str) -> list[int]:
@@ -431,6 +487,8 @@ def write_community_from_combined_dccm(
 
 def run() -> None:
     args = parse_args()
+    project_root = Path(__file__).resolve().parents[1]
+    workspace_root = project_root.parent
     a_psf = str(Path(args.a_psf))
     b_psf = str(Path(args.b_psf))
     a_dir = Path(args.a_dir)
@@ -680,7 +738,12 @@ def run() -> None:
         "community_A": community_a_info,
         "community_B": community_b_info,
     }
-    save_json(ab_results / "summary_combined.json", summary)
+    save_json(
+        ab_results / "summary_combined.json",
+        summary,
+        repo_root=project_root,
+        workspace_root=workspace_root,
+    )
     stage.update(1)
     stage.close()
     print(f"AB combined analysis completed: {ab_results}")
