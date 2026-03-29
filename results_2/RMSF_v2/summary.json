@@ -1,0 +1,65 @@
+{
+  "results_root": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_2\\RMSF_v2",
+  "skip_first_n_frames_per_run": 100,
+  "common_segids": [
+    "A",
+    "B",
+    "R",
+    "S",
+    "T"
+  ],
+  "comparisons": {
+    "A vs B": {
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "outputs": {
+        "overlay": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_2\\RMSF_v2\\A vs B\\overlay_RMSF.png",
+        "delta_abs": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_2\\RMSF_v2\\A vs B\\delta_RMSF_abs.png"
+      }
+    },
+    "A vs F670G": {
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "outputs": {
+        "overlay": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_2\\RMSF_v2\\A vs F670G\\overlay_RMSF.png",
+        "delta_abs": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_2\\RMSF_v2\\A vs F670G\\delta_RMSF_abs.png"
+      }
+    },
+    "A vs I669G": {
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "outputs": {
+        "overlay": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_2\\RMSF_v2\\A vs I669G\\overlay_RMSF.png",
+        "delta_abs": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_2\\RMSF_v2\\A vs I669G\\delta_RMSF_abs.png"
+      }
+    },
+    "A vs R668G": {
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "outputs": {
+        "overlay": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_2\\RMSF_v2\\A vs R668G\\overlay_RMSF.png",
+        "delta_abs": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_2\\RMSF_v2\\A vs R668G\\delta_RMSF_abs.png"
+      }
+    }
+  }
+}

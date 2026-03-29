@@ -46,6 +46,18 @@ This repository contains code from user zarama9514.
 - Uses `skip_first_n_frames` for each RUN and helicity residues via `--helicity-resids`.
 - Does not include A-vs-B arrestin asymmetry/symmetry comparison logic.
 
+`scripts/AllIn_run_RMSF_v2.py`
+- RMSF v2 runner for the common A-like comparison space `A/B/R/S/T`.
+- Builds pairwise comparisons for `A vs B`, `A vs F670G`, `A vs I669G`, and `A vs R668G`.
+- In each comparison folder, writes exactly two figures:
+  - `overlay_RMSF.png`
+  - `delta_RMSF_abs.png`
+- Uses the current annotated plotting logic with:
+  - explicit `System` legend for blue/red overlay lines,
+  - colored domain/chain legend below the plot,
+  - mGlu3 domain split `VFT 30-508`, `CRD 509-574`, `TMD 575-831`, `C-tail 832-837`,
+  - separate phospho-tail block `856-864`.
+
 `requierements/pyproject.toml`
 `requierements/uv.lock`
 `requierements/requirements.txt`
@@ -76,6 +88,20 @@ This repository contains code from user zarama9514.
   - `mutants_info/README.md`: human-readable summary for mutant set.
   - `mutants_info/mutant_metadata.json`: machine-readable extracted metadata.
 
+`results_2/RMSF_v2/`
+- RMSF-only comparison block with the current annotated plot style.
+- Contains the plotting wrapper:
+  - `results_2/RMSF_v2/plot_rmsf_v2.py`
+- Contains one subfolder per comparison:
+  - `results_2/RMSF_v2/A vs B/`
+  - `results_2/RMSF_v2/A vs F670G/`
+  - `results_2/RMSF_v2/A vs I669G/`
+  - `results_2/RMSF_v2/A vs R668G/`
+- Each comparison subfolder contains:
+  - `overlay_RMSF.png`
+  - `delta_RMSF_abs.png`
+- `summary.json` stores run ids and output paths for the RMSF v2 block.
+
 ## Executable Paths
 
 - Geometry/analysis module: `scripts/AllIn_geometry.py`
@@ -86,4 +112,6 @@ This repository contains code from user zarama9514.
 - PSF cleaner: `scripts/AllIn_psf_cleaner.py`
 - AB combined runner: `scripts/AllIn_run_AB_combined.py`
 - MUT vs A combined runner: `scripts/AllIn_run_MUT_vs_A_combined.py`
+- RMSF v2 runner: `scripts/AllIn_run_RMSF_v2.py`
+- RMSF v2 plotting wrapper: `results_2/RMSF_v2/plot_rmsf_v2.py`
 - System-specific run scripts should be named by your internal system labels and added under `scripts/` when needed.

@@ -1,6 +1,7 @@
 ﻿from __future__ import annotations
 
 import csv
+import math
 from pathlib import Path
 from typing import Mapping, Sequence
 
@@ -8,6 +9,68 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib.patches import Patch
+
+
+def build_residue_annotation_blocks(
+    segids: Sequence[str] | np.ndarray,
+    resids: Sequence[int] | np.ndarray,
+    block_definitions: Sequence[Mapping[str, object]],
+    include_unmatched: bool = False,
+) -> list[dict[str, object]]:
+    segid_arr = np.asarray(segids, dtype=str).reshape(-1)
+    resid_arr = np.asarray(resids, dtype=int).reshape(-1)
+    if segid_arr.size != resid_arr.size:
+        raise ValueError("segids and resids must have the same length")
+    if segid_arr.size == 0:
+        return []
+    assignments: list[dict[str, object] | None] = []
+    for segid, resid in zip(segid_arr, resid_arr):
+        matched: dict[str, object] | None = None
+        for raw_def in block_definitions:
+            def_segid = str(raw_def.get("segid", "")).strip()
+            if def_segid != segid:
+                continue
+            start_resid = int(raw_def.get("start_resid", int(resid_arr.min())))
+            end_resid = int(raw_def.get("end_resid", int(resid_arr.max())))
+            if start_resid <= int(resid) <= end_resid:
+                matched = {
+                    "segid": segid,
+                    "label": str(raw_def.get("label", segid)),
+                    "color": str(raw_def.get("color", "#d9d9d9")),
+                    "alpha": float(raw_def.get("alpha", 0.12)),
+                }
+                break
+        if matched is None and include_unmatched:
+            matched = {
+                "segid": segid,
+                "label": segid,
+                "color": "#d9d9d9",
+                "alpha": 0.08,
+            }
+        assignments.append(matched)
+    blocks: list[dict[str, object]] = []
+    current = assignments[0]
+    start_idx = 0
+    for idx in range(1, len(assignments) + 1):
+        candidate = assignments[idx] if idx < len(assignments) else None
+        if candidate != current:
+            if current is not None:
+                blocks.append(
+                    {
+                        "segid": current["segid"],
+                        "label": current["label"],
+                        "color": current["color"],
+                        "alpha": current["alpha"],
+                        "start_idx": int(start_idx),
+                        "end_idx": int(idx - 1),
+                        "start_resid": int(resid_arr[start_idx]),
+                        "end_resid": int(resid_arr[idx - 1]),
+                    }
+                )
+            current = candidate
+            start_idx = idx
+    return blocks
 
 
 class PlotBase:
@@ -31,8 +94,192 @@ class PlotBase:
         if save_path:
             fig.savefig(save_path, dpi=self.dpi, bbox_inches="tight")
 
+    @staticmethod
+    def _build_block_ticks(
+        residue_numbers: np.ndarray,
+        residue_annotation_blocks: Sequence[Mapping[str, object]],
+        max_ticks_total: int = 12,
+    ) -> tuple[np.ndarray, list[str]]:
+        if not residue_annotation_blocks:
+            return residue_numbers.astype(float), [str(int(x)) for x in residue_numbers]
+        blocks = list(residue_annotation_blocks)
+        if len(blocks) > max_ticks_total:
+            selected_idx = np.linspace(0, len(blocks) - 1, num=max_ticks_total, dtype=int)
+            selected_idx = np.unique(selected_idx)
+            ticks = np.asarray(
+                [
+                    int((int(blocks[idx]["start_idx"]) + int(blocks[idx]["end_idx"])) // 2)
+                    for idx in selected_idx
+                ],
+                dtype=float,
+            )
+            labels = [str(int(residue_numbers[int(tick)])) for tick in ticks.astype(int)]
+            return ticks, labels
+        ticks: list[int] = []
+        labels: list[str] = []
+        per_block = max(1, max_ticks_total // max(1, len(blocks)))
+        for block in blocks:
+            start_idx = int(block["start_idx"])
+            end_idx = int(block["end_idx"])
+            span = end_idx - start_idx + 1
+            if span <= per_block:
+                idx = np.arange(start_idx, end_idx + 1, dtype=int)
+            elif per_block == 1:
+                idx = np.asarray([(start_idx + end_idx) // 2], dtype=int)
+            else:
+                idx = np.linspace(start_idx, end_idx, num=per_block, dtype=int)
+                idx = np.unique(idx)
+            for item in idx:
+                ticks.append(int(item))
+                labels.append(str(int(residue_numbers[item])))
+        unique_ticks: list[int] = []
+        unique_labels: list[str] = []
+        seen: set[int] = set()
+        for tick, label in zip(ticks, labels):
+            if tick in seen:
+                continue
+            seen.add(tick)
+            unique_ticks.append(tick)
+            unique_labels.append(label)
+        return np.asarray(unique_ticks, dtype=float), unique_labels
+
+    @staticmethod
+    def _annotation_legend_entries(
+        residue_annotation_blocks: Sequence[Mapping[str, object]],
+        prefix: str = "",
+    ) -> list[dict[str, object]]:
+        entries: list[dict[str, object]] = []
+        seen: set[tuple[str, str]] = set()
+        for block in residue_annotation_blocks:
+            label = (
+                f"{prefix}{str(block['label'])} "
+                f"({int(block['start_resid'])}-{int(block['end_resid'])})"
+            )
+            color = str(block.get("color", "#d9d9d9"))
+            key = (label, color)
+            if key in seen:
+                continue
+            seen.add(key)
+            entries.append(
+                {
+                    "label": label,
+                    "color": color,
+                    "alpha": float(block.get("alpha", 0.12)),
+                }
+            )
+        return entries
+
+    def _apply_annotation_legend(
+        self,
+        ax: plt.Axes,
+        entries: Sequence[Mapping[str, object]],
+        legend_title: str = "Annotated Regions",
+        max_cols: int = 4,
+        y_offset: float = -0.18,
+    ) -> int:
+        if not entries:
+            return 0
+        cols = max(1, min(int(max_cols), len(entries)))
+        handles = [
+            Patch(
+                facecolor=str(entry["color"]),
+                edgecolor="black",
+                linewidth=0.6,
+                alpha=max(0.85, float(entry.get("alpha", 0.12))),
+                label=str(entry["label"]),
+            )
+            for entry in entries
+        ]
+        existing_legend = ax.get_legend()
+        ax.legend(
+            handles=handles,
+            loc="upper center",
+            bbox_to_anchor=(0.5, y_offset),
+            ncol=cols,
+            frameon=False,
+            fontsize=8,
+            title=legend_title,
+            title_fontsize=9,
+            borderaxespad=0.0,
+        )
+        if existing_legend is not None:
+            ax.add_artist(existing_legend)
+        return int(math.ceil(len(entries) / float(cols)))
+
+    def _apply_x_annotation_blocks(
+        self,
+        fig: plt.Figure,
+        ax: plt.Axes,
+        residue_annotation_blocks: Sequence[Mapping[str, object]] | None,
+    ) -> None:
+        if not residue_annotation_blocks:
+            return
+        for block in residue_annotation_blocks:
+            start_idx = float(block["start_idx"]) - 0.5
+            end_idx = float(block["end_idx"]) + 0.5
+            ax.axvspan(
+                start_idx,
+                end_idx,
+                color=str(block.get("color", "#d9d9d9")),
+                alpha=float(block.get("alpha", 0.12)),
+                linewidth=0,
+            )
+            ax.axvline(end_idx, color="black", linewidth=0.4, alpha=0.25)
+
+    def _apply_xy_annotation_blocks(
+        self,
+        fig: plt.Figure,
+        ax: plt.Axes,
+        x_annotation_blocks: Sequence[Mapping[str, object]] | None,
+        y_annotation_blocks: Sequence[Mapping[str, object]] | None,
+    ) -> None:
+        if x_annotation_blocks:
+            for block in x_annotation_blocks:
+                start_idx = float(block["start_idx"]) - 0.5
+                end_idx = float(block["end_idx"]) + 0.5
+                ax.axvspan(
+                    start_idx,
+                    end_idx,
+                    color=str(block.get("color", "#d9d9d9")),
+                    alpha=float(block.get("alpha", 0.07)),
+                    linewidth=0,
+                )
+                ax.axvline(end_idx, color="black", linewidth=0.4, alpha=0.25)
+        if y_annotation_blocks:
+            for block in y_annotation_blocks:
+                start_idx = float(block["start_idx"]) - 0.5
+                end_idx = float(block["end_idx"]) + 0.5
+                ax.axhspan(
+                    start_idx,
+                    end_idx,
+                    color=str(block.get("color", "#d9d9d9")),
+                    alpha=float(block.get("alpha", 0.07)),
+                    linewidth=0,
+                )
+                ax.axhline(end_idx, color="black", linewidth=0.4, alpha=0.25)
+
 
 class RMSProfilePlotter(PlotBase):
+    def _apply_rmsf_axis_blocks(
+        self,
+        fig: plt.Figure,
+        ax: plt.Axes,
+        residue_numbers: np.ndarray,
+        residue_annotation_blocks: Sequence[Mapping[str, object]] | None,
+    ) -> None:
+        if not residue_annotation_blocks:
+            return
+        ticks, labels = self._build_block_ticks(residue_numbers, residue_annotation_blocks)
+        ax.set_xticks(ticks)
+        ax.set_xticklabels(labels, rotation=60, ha="right", fontsize=7)
+        self._apply_x_annotation_blocks(fig, ax, residue_annotation_blocks)
+        legend_rows = self._apply_annotation_legend(
+            ax,
+            self._annotation_legend_entries(residue_annotation_blocks),
+            y_offset=-0.19,
+        )
+        fig.subplots_adjust(bottom=min(0.42, 0.16 + 0.05 * legend_rows), top=0.88)
+
     def _plot_profile(
         self,
         x_values: Sequence[float] | np.ndarray,
@@ -50,7 +297,7 @@ class RMSProfilePlotter(PlotBase):
         ax.plot(x, y, color=color, linewidth=1.4)
         ax.set_xlabel(x_label)
         ax.set_ylabel(y_label)
-        ax.set_title(title)
+        ax.set_title(title, pad=12)
         ax.grid(alpha=0.3)
         self._save(fig, save_path)
         return fig, ax
@@ -92,17 +339,53 @@ class RMSProfilePlotter(PlotBase):
         amino_acid_numbers: Sequence[int] | np.ndarray,
         rmsf_values: Sequence[float] | np.ndarray,
         title: str = "RMSF Profile",
+        residue_annotation_blocks: Sequence[Mapping[str, object]] | None = None,
         save_path: str | None = None,
     ) -> tuple[plt.Figure, plt.Axes]:
-        return self._plot_profile(
-            x_values=amino_acid_numbers,
-            values=rmsf_values,
-            x_label="Amino Acid Number",
-            title=title,
-            y_label="RMSF, Å.",
-            color="indianred",
-            save_path=save_path,
-        )
+        x = self._as_1d(amino_acid_numbers, "amino_acid_numbers").astype(int)
+        y = self._as_1d(rmsf_values, "rmsf_values")
+        self._validate_same_length(x, y, "amino_acid_numbers", "rmsf_values")
+        fig, ax = plt.subplots(figsize=self.figsize)
+        x_plot = np.arange(x.size, dtype=float) if residue_annotation_blocks else x.astype(float)
+        ax.plot(x_plot, y, color="indianred", linewidth=1.4)
+        ax.set_xlabel("Amino Acid Number", labelpad=4)
+        ax.set_ylabel("RMSF, Å.")
+        ax.set_title(title, pad=12)
+        ax.grid(alpha=0.3)
+        self._apply_rmsf_axis_blocks(fig, ax, x, residue_annotation_blocks)
+        self._save(fig, save_path)
+        return fig, ax
+
+    def plot_rmsf_overlay(
+        self,
+        amino_acid_numbers: Sequence[int] | np.ndarray,
+        rmsf_values_a: Sequence[float] | np.ndarray,
+        rmsf_values_b: Sequence[float] | np.ndarray,
+        label_a: str = "A",
+        label_b: str = "B",
+        color_a: str = "blue",
+        color_b: str = "red",
+        title: str = "RMSF Comparison",
+        residue_annotation_blocks: Sequence[Mapping[str, object]] | None = None,
+        save_path: str | None = None,
+    ) -> tuple[plt.Figure, plt.Axes]:
+        x = self._as_1d(amino_acid_numbers, "amino_acid_numbers").astype(int)
+        y_a = self._as_1d(rmsf_values_a, "rmsf_values_a")
+        y_b = self._as_1d(rmsf_values_b, "rmsf_values_b")
+        self._validate_same_length(x, y_a, "amino_acid_numbers", "rmsf_values_a")
+        self._validate_same_length(x, y_b, "amino_acid_numbers", "rmsf_values_b")
+        fig, ax = plt.subplots(figsize=self.figsize)
+        x_plot = np.arange(x.size, dtype=float) if residue_annotation_blocks else x.astype(float)
+        ax.plot(x_plot, y_a, color=color_a, linewidth=1.6, label=label_a)
+        ax.plot(x_plot, y_b, color=color_b, linewidth=1.6, label=label_b)
+        ax.set_xlabel("Amino Acid Number", labelpad=4)
+        ax.set_ylabel("RMSF, Å.")
+        ax.set_title(title, pad=12)
+        ax.grid(alpha=0.3)
+        ax.legend(loc="upper right", title="System")
+        self._apply_rmsf_axis_blocks(fig, ax, x, residue_annotation_blocks)
+        self._save(fig, save_path)
+        return fig, ax
 
 
 class RMSDDifferencePlotter(PlotBase):
@@ -155,18 +438,31 @@ class RMSFDifferencePlotter(PlotBase):
         rmsf_values_a: Sequence[float] | np.ndarray,
         rmsf_values_b: Sequence[float] | np.ndarray,
         title: str = "Absolute RMSF Difference Profile",
+        residue_annotation_blocks: Sequence[Mapping[str, object]] | None = None,
         save_path: str | None = None,
     ) -> tuple[np.ndarray, plt.Figure, plt.Axes]:
         diff = self.calculate_absolute_difference(rmsf_values_a, rmsf_values_b)
         x = self._as_1d(amino_acid_numbers, "amino_acid_numbers")
         self._validate_same_length(x, diff, "amino_acid_numbers", "rmsf difference")
         fig, ax = plt.subplots(figsize=self.figsize)
-        ax.plot(x, diff, color="teal", linewidth=1.4, label="|Delta RMSF|")
-        ax.set_xlabel("Amino Acid Number")
+        x_plot = np.arange(x.size, dtype=float) if residue_annotation_blocks else x
+        ax.plot(x_plot, diff, color="teal", linewidth=1.4, label="|Delta RMSF|")
+        ax.set_xlabel("Amino Acid Number", labelpad=4)
         ax.set_ylabel("|Delta RMSF|, Å.")
-        ax.set_title(title)
+        ax.set_title(title, pad=12)
         ax.legend()
         ax.grid(alpha=0.3)
+        if residue_annotation_blocks:
+            ticks, labels = self._build_block_ticks(x.astype(int), residue_annotation_blocks)
+            ax.set_xticks(ticks)
+            ax.set_xticklabels(labels, rotation=60, ha="right", fontsize=7)
+            self._apply_x_annotation_blocks(fig, ax, residue_annotation_blocks)
+            legend_rows = self._apply_annotation_legend(
+                ax,
+                self._annotation_legend_entries(residue_annotation_blocks),
+                y_offset=-0.19,
+            )
+            fig.subplots_adjust(bottom=min(0.42, 0.18 + 0.05 * legend_rows), top=0.88)
         self._save(fig, save_path)
         return diff, fig, ax
 
@@ -260,6 +556,8 @@ class DCCMPlotter(PlotBase):
         y_resids: Sequence[int] | np.ndarray,
         x_chain_ranges: Sequence[Mapping[str, int | str]] | None = None,
         y_chain_ranges: Sequence[Mapping[str, int | str]] | None = None,
+        x_annotation_blocks: Sequence[Mapping[str, object]] | None = None,
+        y_annotation_blocks: Sequence[Mapping[str, object]] | None = None,
         title: str = "DCCM Heatmap",
         cmap: str = "RdBu_r",
         vmin: float = -1.0,
@@ -274,7 +572,7 @@ class DCCMPlotter(PlotBase):
             raise ValueError("dccm columns must match x_resids length")
         if matrix.shape[0] != y.size:
             raise ValueError("dccm rows must match y_resids length")
-        fig, ax = plt.subplots(figsize=self.figsize, constrained_layout=True)
+        fig, ax = plt.subplots(figsize=self.figsize)
         image = ax.imshow(
             matrix,
             cmap=cmap,
@@ -293,8 +591,8 @@ class DCCMPlotter(PlotBase):
         ax.set_yticklabels(y_tick_labels)
         ax.set_xlabel("Residue Number (X)")
         ax.set_ylabel("Residue Number (Y)")
-        ax.set_title(title)
-        if x_chain_ranges:
+        ax.set_title(title, pad=12)
+        if x_annotation_blocks is None and x_chain_ranges:
             for row in x_chain_ranges[:-1]:
                 ax.axvline(int(row["end_idx"]) + 0.5, color="black", linewidth=0.5, alpha=0.6)
             x_centers = [
@@ -307,7 +605,7 @@ class DCCMPlotter(PlotBase):
             top_ax.set_xticks(x_centers)
             top_ax.set_xticklabels(x_labels, rotation=90, fontsize=8)
             top_ax.set_xlabel("Chain (X)")
-        if y_chain_ranges:
+        if y_annotation_blocks is None and y_chain_ranges:
             for row in y_chain_ranges[:-1]:
                 ax.axhline(int(row["end_idx"]) + 0.5, color="black", linewidth=0.5, alpha=0.6)
             y_centers = [
@@ -320,7 +618,19 @@ class DCCMPlotter(PlotBase):
             right_ax.set_yticks(y_centers)
             right_ax.set_yticklabels(y_labels, fontsize=8)
             right_ax.set_ylabel("Chain (Y)")
-        if x_chain_ranges or y_chain_ranges:
+        self._apply_xy_annotation_blocks(fig, ax, x_annotation_blocks, y_annotation_blocks)
+        if x_annotation_blocks or y_annotation_blocks:
+            legend_entries = self._annotation_legend_entries(x_annotation_blocks or [], prefix="X: ")
+            legend_entries.extend(self._annotation_legend_entries(y_annotation_blocks or [], prefix="Y: "))
+            legend_rows = self._apply_annotation_legend(
+                ax,
+                legend_entries,
+                legend_title="Annotated Regions",
+                max_cols=3,
+                y_offset=-0.16,
+            )
+            fig.subplots_adjust(bottom=min(0.46, 0.16 + 0.06 * legend_rows), top=0.90)
+        if (x_chain_ranges or y_chain_ranges) and not (x_annotation_blocks or y_annotation_blocks):
             x_map = self._chain_map_text(x_chain_ranges or [], "X")
             y_map = self._chain_map_text(y_chain_ranges or [], "Y")
             fig.text(0.5, -0.02, f"{x_map}\n{y_map}", ha="center", va="top", fontsize=8)
@@ -346,6 +656,8 @@ class DCCMPlotter(PlotBase):
         y_resids: Sequence[int] | np.ndarray,
         x_chain_ranges: Sequence[Mapping[str, int | str]] | None = None,
         y_chain_ranges: Sequence[Mapping[str, int | str]] | None = None,
+        x_annotation_blocks: Sequence[Mapping[str, object]] | None = None,
+        y_annotation_blocks: Sequence[Mapping[str, object]] | None = None,
         title: str = "Normalized DCCM Difference Heatmap",
         save_path: str | None = None,
     ) -> tuple[np.ndarray, plt.Figure, plt.Axes]:
@@ -356,6 +668,8 @@ class DCCMPlotter(PlotBase):
             y_resids=y_resids,
             x_chain_ranges=x_chain_ranges,
             y_chain_ranges=y_chain_ranges,
+            x_annotation_blocks=x_annotation_blocks,
+            y_annotation_blocks=y_annotation_blocks,
             title=title,
             cmap="RdBu_r",
             vmin=-1.0,
@@ -381,6 +695,8 @@ class DCCMPlotter(PlotBase):
             y_resids=np.asarray(community_output["y_resids"], dtype=int),
             x_chain_ranges=community_output.get("x_chain_ranges"),
             y_chain_ranges=community_output.get("y_chain_ranges"),
+            x_annotation_blocks=community_output.get("x_annotation_blocks"),
+            y_annotation_blocks=community_output.get("y_annotation_blocks"),
             title=title,
             save_path=save_path,
         )
@@ -411,6 +727,8 @@ class DCCMPlotter(PlotBase):
             y_resids=y1,
             x_chain_ranges=community_output_1.get("x_chain_ranges"),
             y_chain_ranges=community_output_1.get("y_chain_ranges"),
+            x_annotation_blocks=community_output_1.get("x_annotation_blocks"),
+            y_annotation_blocks=community_output_1.get("y_annotation_blocks"),
             title=title,
             save_path=save_path,
         )

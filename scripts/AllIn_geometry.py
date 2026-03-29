@@ -90,6 +90,33 @@ class RMSFAnalyzer(GeometryBase):
         analyzer.run(start=skip_first_n_frames, step=step)
         return atoms.resids.copy(), analyzer.results.rmsf.copy()
 
+    def calculate_detailed(
+        self,
+        target_selection: str = "name CA",
+        align_selection: str = "protein and backbone",
+        ref_frame: int = 0,
+        step: int = 1,
+        skip_first_n_frames: int = 0,
+    ) -> dict[str, np.ndarray]:
+        step = self._validate_step(step)
+        skip_first_n_frames = self._validate_skip(skip_first_n_frames)
+        universe = self._build_universe()
+        align.AlignTraj(
+            universe,
+            universe,
+            select=align_selection,
+            ref_frame=ref_frame,
+            in_memory=True,
+        ).run(start=skip_first_n_frames, step=step)
+        atoms = universe.select_atoms(target_selection)
+        analyzer = rms.RMSF(atoms)
+        analyzer.run(start=skip_first_n_frames, step=step)
+        return {
+            "resids": atoms.resids.copy().astype(int),
+            "segids": atoms.segids.astype(str),
+            "rmsf": analyzer.results.rmsf.copy().astype(float),
+        }
+
 
 class HelicityAnalyzer(GeometryBase):
     def _is_helical(self, residue) -> int:
