@@ -1,0 +1,62 @@
+{
+  "system": "B",
+  "runs_used": [
+    "RUN1",
+    "RUN2",
+    "RUN3",
+    "RUN4",
+    "RUN5"
+  ],
+  "pairs": [
+    {
+      "pair_label": "T_to_A",
+      "tail_segid": "T",
+      "arrestin_segid": "A",
+      "outputs": {
+        "sasa_frames_csv": "results_2/phospho_tail_coupling/B/T_to_A/01_sasa/T_phospho_sasa_frames.csv",
+        "sasa_summary_csv": "results_2/phospho_tail_coupling/B/T_to_A/01_sasa/T_phospho_sasa_summary.csv",
+        "sasa_residue_distribution_png": "results_2/phospho_tail_coupling/B/T_to_A/01_sasa/T_phospho_residue_sasa_distribution.png",
+        "sasa_total_distribution_png": "results_2/phospho_tail_coupling/B/T_to_A/01_sasa/T_phospho_total_sasa_distribution.png",
+        "contacts_csv": "results_2/phospho_tail_coupling/B/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contacts.csv",
+        "contact_counts_csv": "results_2/phospho_tail_coupling/B/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts.csv",
+        "contact_top_png": "results_2/phospho_tail_coupling/B/T_to_A/02_tail_n_domain_contacts/top15_tail_n_domain_contacts_by_lifetime.png",
+        "contact_counts_png": "results_2/phospho_tail_coupling/B/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts_timeseries.png",
+        "salt_bridges_atom_csv": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/salt_bridges_atom_level.csv",
+        "salt_bridges_residue_csv": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/salt_bridges_residue_level.csv",
+        "salt_bridge_candidates_csv": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/candidate_n_domain_lys_arg.csv",
+        "salt_bridge_counts_csv": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/salt_bridge_counts.csv",
+        "salt_bridge_top_png": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/top15_salt_bridges_by_lifetime.png",
+        "salt_bridge_counts_png": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/salt_bridge_counts_timeseries.png"
+      },
+      "n_contact_pairs": 74,
+      "n_salt_bridge_atom_pairs": 59,
+      "n_salt_bridge_residue_pairs": 9,
+      "n_candidate_lys_arg": 7
+    },
+    {
+      "pair_label": "L_to_C",
+      "tail_segid": "L",
+      "arrestin_segid": "C",
+      "outputs": {
+        "sasa_frames_csv": "results_2/phospho_tail_coupling/B/L_to_C/01_sasa/L_phospho_sasa_frames.csv",
+        "sasa_summary_csv": "results_2/phospho_tail_coupling/B/L_to_C/01_sasa/L_phospho_sasa_summary.csv",
+        "sasa_residue_distribution_png": "results_2/phospho_tail_coupling/B/L_to_C/01_sasa/L_phospho_residue_sasa_distribution.png",
+        "sasa_total_distribution_png": "results_2/phospho_tail_coupling/B/L_to_C/01_sasa/L_phospho_total_sasa_distribution.png",
+        "contacts_csv": "results_2/phospho_tail_coupling/B/L_to_C/02_tail_n_domain_contacts/tail_n_domain_contacts.csv",
+        "contact_counts_csv": "results_2/phospho_tail_coupling/B/L_to_C/02_tail_n_domain_contacts/tail_n_domain_contact_counts.csv",
+        "contact_top_png": "results_2/phospho_tail_coupling/B/L_to_C/02_tail_n_domain_contacts/top15_tail_n_domain_contacts_by_lifetime.png",
+        "contact_counts_png": "results_2/phospho_tail_coupling/B/L_to_C/02_tail_n_domain_contacts/tail_n_domain_contact_counts_timeseries.png",
+        "salt_bridges_atom_csv": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/salt_bridges_atom_level.csv",
+        "salt_bridges_residue_csv": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/salt_bridges_residue_level.csv",
+        "salt_bridge_candidates_csv": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/candidate_n_domain_lys_arg.csv",
+        "salt_bridge_counts_csv": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/salt_bridge_counts.csv",
+        "salt_bridge_top_png": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/top15_salt_bridges_by_lifetime.png",
+        "salt_bridge_counts_png": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/salt_bridge_counts_timeseries.png"
+      },
+      "n_contact_pairs": 68,
+      "n_salt_bridge_atom_pairs": 61,
+      "n_salt_bridge_residue_pairs": 9,
+      "n_candidate_lys_arg": 5
+    }
+  ]
+}

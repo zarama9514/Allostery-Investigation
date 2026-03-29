@@ -1,0 +1,272 @@
+{
+  "results_root": "results_2/phospho_tail_coupling",
+  "systems": [
+    {
+      "system": "A",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "pairs": [
+        {
+          "pair_label": "T_to_A",
+          "tail_segid": "T",
+          "arrestin_segid": "A",
+          "outputs": {
+            "sasa_frames_csv": "results_2/phospho_tail_coupling/A/T_to_A/01_sasa/T_phospho_sasa_frames.csv",
+            "sasa_summary_csv": "results_2/phospho_tail_coupling/A/T_to_A/01_sasa/T_phospho_sasa_summary.csv",
+            "sasa_residue_distribution_png": "results_2/phospho_tail_coupling/A/T_to_A/01_sasa/T_phospho_residue_sasa_distribution.png",
+            "sasa_total_distribution_png": "results_2/phospho_tail_coupling/A/T_to_A/01_sasa/T_phospho_total_sasa_distribution.png",
+            "contacts_csv": "results_2/phospho_tail_coupling/A/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contacts.csv",
+            "contact_counts_csv": "results_2/phospho_tail_coupling/A/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts.csv",
+            "contact_top_png": "results_2/phospho_tail_coupling/A/T_to_A/02_tail_n_domain_contacts/top15_tail_n_domain_contacts_by_lifetime.png",
+            "contact_counts_png": "results_2/phospho_tail_coupling/A/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts_timeseries.png",
+            "salt_bridges_atom_csv": "results_2/phospho_tail_coupling/A/T_to_A/03_salt_bridges/salt_bridges_atom_level.csv",
+            "salt_bridges_residue_csv": "results_2/phospho_tail_coupling/A/T_to_A/03_salt_bridges/salt_bridges_residue_level.csv",
+            "salt_bridge_candidates_csv": "results_2/phospho_tail_coupling/A/T_to_A/03_salt_bridges/candidate_n_domain_lys_arg.csv",
+            "salt_bridge_counts_csv": "results_2/phospho_tail_coupling/A/T_to_A/03_salt_bridges/salt_bridge_counts.csv",
+            "salt_bridge_top_png": "results_2/phospho_tail_coupling/A/T_to_A/03_salt_bridges/top15_salt_bridges_by_lifetime.png",
+            "salt_bridge_counts_png": "results_2/phospho_tail_coupling/A/T_to_A/03_salt_bridges/salt_bridge_counts_timeseries.png"
+          },
+          "n_contact_pairs": 83,
+          "n_salt_bridge_atom_pairs": 86,
+          "n_salt_bridge_residue_pairs": 12,
+          "n_candidate_lys_arg": 7
+        }
+      ]
+    },
+    {
+      "system": "B",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "pairs": [
+        {
+          "pair_label": "T_to_A",
+          "tail_segid": "T",
+          "arrestin_segid": "A",
+          "outputs": {
+            "sasa_frames_csv": "results_2/phospho_tail_coupling/B/T_to_A/01_sasa/T_phospho_sasa_frames.csv",
+            "sasa_summary_csv": "results_2/phospho_tail_coupling/B/T_to_A/01_sasa/T_phospho_sasa_summary.csv",
+            "sasa_residue_distribution_png": "results_2/phospho_tail_coupling/B/T_to_A/01_sasa/T_phospho_residue_sasa_distribution.png",
+            "sasa_total_distribution_png": "results_2/phospho_tail_coupling/B/T_to_A/01_sasa/T_phospho_total_sasa_distribution.png",
+            "contacts_csv": "results_2/phospho_tail_coupling/B/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contacts.csv",
+            "contact_counts_csv": "results_2/phospho_tail_coupling/B/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts.csv",
+            "contact_top_png": "results_2/phospho_tail_coupling/B/T_to_A/02_tail_n_domain_contacts/top15_tail_n_domain_contacts_by_lifetime.png",
+            "contact_counts_png": "results_2/phospho_tail_coupling/B/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts_timeseries.png",
+            "salt_bridges_atom_csv": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/salt_bridges_atom_level.csv",
+            "salt_bridges_residue_csv": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/salt_bridges_residue_level.csv",
+            "salt_bridge_candidates_csv": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/candidate_n_domain_lys_arg.csv",
+            "salt_bridge_counts_csv": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/salt_bridge_counts.csv",
+            "salt_bridge_top_png": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/top15_salt_bridges_by_lifetime.png",
+            "salt_bridge_counts_png": "results_2/phospho_tail_coupling/B/T_to_A/03_salt_bridges/salt_bridge_counts_timeseries.png"
+          },
+          "n_contact_pairs": 74,
+          "n_salt_bridge_atom_pairs": 59,
+          "n_salt_bridge_residue_pairs": 9,
+          "n_candidate_lys_arg": 7
+        },
+        {
+          "pair_label": "L_to_C",
+          "tail_segid": "L",
+          "arrestin_segid": "C",
+          "outputs": {
+            "sasa_frames_csv": "results_2/phospho_tail_coupling/B/L_to_C/01_sasa/L_phospho_sasa_frames.csv",
+            "sasa_summary_csv": "results_2/phospho_tail_coupling/B/L_to_C/01_sasa/L_phospho_sasa_summary.csv",
+            "sasa_residue_distribution_png": "results_2/phospho_tail_coupling/B/L_to_C/01_sasa/L_phospho_residue_sasa_distribution.png",
+            "sasa_total_distribution_png": "results_2/phospho_tail_coupling/B/L_to_C/01_sasa/L_phospho_total_sasa_distribution.png",
+            "contacts_csv": "results_2/phospho_tail_coupling/B/L_to_C/02_tail_n_domain_contacts/tail_n_domain_contacts.csv",
+            "contact_counts_csv": "results_2/phospho_tail_coupling/B/L_to_C/02_tail_n_domain_contacts/tail_n_domain_contact_counts.csv",
+            "contact_top_png": "results_2/phospho_tail_coupling/B/L_to_C/02_tail_n_domain_contacts/top15_tail_n_domain_contacts_by_lifetime.png",
+            "contact_counts_png": "results_2/phospho_tail_coupling/B/L_to_C/02_tail_n_domain_contacts/tail_n_domain_contact_counts_timeseries.png",
+            "salt_bridges_atom_csv": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/salt_bridges_atom_level.csv",
+            "salt_bridges_residue_csv": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/salt_bridges_residue_level.csv",
+            "salt_bridge_candidates_csv": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/candidate_n_domain_lys_arg.csv",
+            "salt_bridge_counts_csv": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/salt_bridge_counts.csv",
+            "salt_bridge_top_png": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/top15_salt_bridges_by_lifetime.png",
+            "salt_bridge_counts_png": "results_2/phospho_tail_coupling/B/L_to_C/03_salt_bridges/salt_bridge_counts_timeseries.png"
+          },
+          "n_contact_pairs": 68,
+          "n_salt_bridge_atom_pairs": 61,
+          "n_salt_bridge_residue_pairs": 9,
+          "n_candidate_lys_arg": 5
+        }
+      ]
+    },
+    {
+      "system": "F670G",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "pairs": [
+        {
+          "pair_label": "T_to_A",
+          "tail_segid": "T",
+          "arrestin_segid": "A",
+          "outputs": {
+            "sasa_frames_csv": "results_2/phospho_tail_coupling/F670G/T_to_A/01_sasa/T_phospho_sasa_frames.csv",
+            "sasa_summary_csv": "results_2/phospho_tail_coupling/F670G/T_to_A/01_sasa/T_phospho_sasa_summary.csv",
+            "sasa_residue_distribution_png": "results_2/phospho_tail_coupling/F670G/T_to_A/01_sasa/T_phospho_residue_sasa_distribution.png",
+            "sasa_total_distribution_png": "results_2/phospho_tail_coupling/F670G/T_to_A/01_sasa/T_phospho_total_sasa_distribution.png",
+            "contacts_csv": "results_2/phospho_tail_coupling/F670G/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contacts.csv",
+            "contact_counts_csv": "results_2/phospho_tail_coupling/F670G/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts.csv",
+            "contact_top_png": "results_2/phospho_tail_coupling/F670G/T_to_A/02_tail_n_domain_contacts/top15_tail_n_domain_contacts_by_lifetime.png",
+            "contact_counts_png": "results_2/phospho_tail_coupling/F670G/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts_timeseries.png",
+            "salt_bridges_atom_csv": "results_2/phospho_tail_coupling/F670G/T_to_A/03_salt_bridges/salt_bridges_atom_level.csv",
+            "salt_bridges_residue_csv": "results_2/phospho_tail_coupling/F670G/T_to_A/03_salt_bridges/salt_bridges_residue_level.csv",
+            "salt_bridge_candidates_csv": "results_2/phospho_tail_coupling/F670G/T_to_A/03_salt_bridges/candidate_n_domain_lys_arg.csv",
+            "salt_bridge_counts_csv": "results_2/phospho_tail_coupling/F670G/T_to_A/03_salt_bridges/salt_bridge_counts.csv",
+            "salt_bridge_top_png": "results_2/phospho_tail_coupling/F670G/T_to_A/03_salt_bridges/top15_salt_bridges_by_lifetime.png",
+            "salt_bridge_counts_png": "results_2/phospho_tail_coupling/F670G/T_to_A/03_salt_bridges/salt_bridge_counts_timeseries.png"
+          },
+          "n_contact_pairs": 87,
+          "n_salt_bridge_atom_pairs": 103,
+          "n_salt_bridge_residue_pairs": 14,
+          "n_candidate_lys_arg": 9
+        }
+      ]
+    },
+    {
+      "system": "I669G",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "pairs": [
+        {
+          "pair_label": "T_to_A",
+          "tail_segid": "T",
+          "arrestin_segid": "A",
+          "outputs": {
+            "sasa_frames_csv": "results_2/phospho_tail_coupling/I669G/T_to_A/01_sasa/T_phospho_sasa_frames.csv",
+            "sasa_summary_csv": "results_2/phospho_tail_coupling/I669G/T_to_A/01_sasa/T_phospho_sasa_summary.csv",
+            "sasa_residue_distribution_png": "results_2/phospho_tail_coupling/I669G/T_to_A/01_sasa/T_phospho_residue_sasa_distribution.png",
+            "sasa_total_distribution_png": "results_2/phospho_tail_coupling/I669G/T_to_A/01_sasa/T_phospho_total_sasa_distribution.png",
+            "contacts_csv": "results_2/phospho_tail_coupling/I669G/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contacts.csv",
+            "contact_counts_csv": "results_2/phospho_tail_coupling/I669G/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts.csv",
+            "contact_top_png": "results_2/phospho_tail_coupling/I669G/T_to_A/02_tail_n_domain_contacts/top15_tail_n_domain_contacts_by_lifetime.png",
+            "contact_counts_png": "results_2/phospho_tail_coupling/I669G/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts_timeseries.png",
+            "salt_bridges_atom_csv": "results_2/phospho_tail_coupling/I669G/T_to_A/03_salt_bridges/salt_bridges_atom_level.csv",
+            "salt_bridges_residue_csv": "results_2/phospho_tail_coupling/I669G/T_to_A/03_salt_bridges/salt_bridges_residue_level.csv",
+            "salt_bridge_candidates_csv": "results_2/phospho_tail_coupling/I669G/T_to_A/03_salt_bridges/candidate_n_domain_lys_arg.csv",
+            "salt_bridge_counts_csv": "results_2/phospho_tail_coupling/I669G/T_to_A/03_salt_bridges/salt_bridge_counts.csv",
+            "salt_bridge_top_png": "results_2/phospho_tail_coupling/I669G/T_to_A/03_salt_bridges/top15_salt_bridges_by_lifetime.png",
+            "salt_bridge_counts_png": "results_2/phospho_tail_coupling/I669G/T_to_A/03_salt_bridges/salt_bridge_counts_timeseries.png"
+          },
+          "n_contact_pairs": 97,
+          "n_salt_bridge_atom_pairs": 109,
+          "n_salt_bridge_residue_pairs": 16,
+          "n_candidate_lys_arg": 7
+        }
+      ]
+    },
+    {
+      "system": "R668G",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "pairs": [
+        {
+          "pair_label": "T_to_A",
+          "tail_segid": "T",
+          "arrestin_segid": "A",
+          "outputs": {
+            "sasa_frames_csv": "results_2/phospho_tail_coupling/R668G/T_to_A/01_sasa/T_phospho_sasa_frames.csv",
+            "sasa_summary_csv": "results_2/phospho_tail_coupling/R668G/T_to_A/01_sasa/T_phospho_sasa_summary.csv",
+            "sasa_residue_distribution_png": "results_2/phospho_tail_coupling/R668G/T_to_A/01_sasa/T_phospho_residue_sasa_distribution.png",
+            "sasa_total_distribution_png": "results_2/phospho_tail_coupling/R668G/T_to_A/01_sasa/T_phospho_total_sasa_distribution.png",
+            "contacts_csv": "results_2/phospho_tail_coupling/R668G/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contacts.csv",
+            "contact_counts_csv": "results_2/phospho_tail_coupling/R668G/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts.csv",
+            "contact_top_png": "results_2/phospho_tail_coupling/R668G/T_to_A/02_tail_n_domain_contacts/top15_tail_n_domain_contacts_by_lifetime.png",
+            "contact_counts_png": "results_2/phospho_tail_coupling/R668G/T_to_A/02_tail_n_domain_contacts/tail_n_domain_contact_counts_timeseries.png",
+            "salt_bridges_atom_csv": "results_2/phospho_tail_coupling/R668G/T_to_A/03_salt_bridges/salt_bridges_atom_level.csv",
+            "salt_bridges_residue_csv": "results_2/phospho_tail_coupling/R668G/T_to_A/03_salt_bridges/salt_bridges_residue_level.csv",
+            "salt_bridge_candidates_csv": "results_2/phospho_tail_coupling/R668G/T_to_A/03_salt_bridges/candidate_n_domain_lys_arg.csv",
+            "salt_bridge_counts_csv": "results_2/phospho_tail_coupling/R668G/T_to_A/03_salt_bridges/salt_bridge_counts.csv",
+            "salt_bridge_top_png": "results_2/phospho_tail_coupling/R668G/T_to_A/03_salt_bridges/top15_salt_bridges_by_lifetime.png",
+            "salt_bridge_counts_png": "results_2/phospho_tail_coupling/R668G/T_to_A/03_salt_bridges/salt_bridge_counts_timeseries.png"
+          },
+          "n_contact_pairs": 78,
+          "n_salt_bridge_atom_pairs": 79,
+          "n_salt_bridge_residue_pairs": 13,
+          "n_candidate_lys_arg": 8
+        }
+      ]
+    }
+  ],
+  "sasa_comparisons": [
+    {
+      "comparison": "A vs F670G",
+      "reference_system": "A",
+      "target_system": "F670G",
+      "pair_label": "T_to_A",
+      "outputs": {
+        "delta_mean_sasa_csv": "results_2/phospho_tail_coupling/A vs F670G/delta_mean_sasa_A_minus_mutant.csv",
+        "delta_mean_sasa_png": "results_2/phospho_tail_coupling/A vs F670G/delta_mean_sasa_A_minus_mutant.png"
+      }
+    },
+    {
+      "comparison": "A vs I669G",
+      "reference_system": "A",
+      "target_system": "I669G",
+      "pair_label": "T_to_A",
+      "outputs": {
+        "delta_mean_sasa_csv": "results_2/phospho_tail_coupling/A vs I669G/delta_mean_sasa_A_minus_mutant.csv",
+        "delta_mean_sasa_png": "results_2/phospho_tail_coupling/A vs I669G/delta_mean_sasa_A_minus_mutant.png"
+      }
+    },
+    {
+      "comparison": "A vs R668G",
+      "reference_system": "A",
+      "target_system": "R668G",
+      "pair_label": "T_to_A",
+      "outputs": {
+        "delta_mean_sasa_csv": "results_2/phospho_tail_coupling/A vs R668G/delta_mean_sasa_A_minus_mutant.csv",
+        "delta_mean_sasa_png": "results_2/phospho_tail_coupling/A vs R668G/delta_mean_sasa_A_minus_mutant.png"
+      }
+    }
+  ],
+  "phospho_resids": [
+    856,
+    857,
+    859,
+    860
+  ],
+  "tail_resids": [
+    856,
+    857,
+    858,
+    859,
+    860,
+    861,
+    862,
+    863,
+    864
+  ],
+  "n_domain_range": [
+    1,
+    180
+  ],
+  "skip_first_n_frames_per_run": 100,
+  "step": 10,
+  "contact_cutoff_angstrom": 4.0,
+  "salt_bridge_hydrogen_oxygen_cutoff_angstrom": 2.5
+}

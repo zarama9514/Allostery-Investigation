@@ -19,6 +19,18 @@ This repository contains code from user zarama9514.
 - Example analysis call: `ProteinHydrogenBondAnalyzer(...).run(output_csv=..., skip_first_n_frames=50, step=10)`.
 - Result plotting: `HydrogenBondPlotter(...).plot_top_contacts(csv_path=..., top_n=15)`.
 
+`scripts/AllIn_phospho_coupling.py`
+- Phospho-tail coupling analysis for catalytic/scaffold questions.
+- Computes phospho-residue SASA distributions for `856, 857, 859, 860` in tail segids such as `T` and `L`.
+- Computes phospho-tail (`856-864`) contacts with arrestin `N-domain 1-180`.
+- Computes phosphate oxygen (`O1P/O2P/OT`) salt bridges to arrestin `Lys/Arg` sidechain hydrogens with cutoff `<= 2.5 Å`.
+- Supports both `skip_first_n_frames` and frame subsampling `step` with default `10`.
+
+`scripts/AllIn_run_phospho_tail_coupling.py`
+- End-to-end runner for phospho-tail coupling analysis across systems `A`, `B`, `F670G`, `I669G`, and `R668G`.
+- For `B`, analyzes both phospho-tail/arrestin pairs: `T_to_A` and `L_to_C`.
+- Aggregates across matched `RUN` ids and writes summary metadata plus CSV/PNG outputs for SASA, tail contacts, and salt bridges.
+
 `scripts/AllIn_DCCM.py`
 - DCCM analysis module for one pair (`psf1+dcd1` vs itself) or two pairs (`psf1+dcd1` vs `psf2+dcd2`).
 - Supports initial-frame cutoff via `skip_first_n_frames`.
@@ -102,6 +114,45 @@ This repository contains code from user zarama9514.
   - `delta_RMSF_abs.png`
 - `summary.json` stores run ids and output paths for the RMSF v2 block.
 
+`results_2/phospho_tail_coupling/`
+- Phospho-tail catalytic/scaffold coupling block.
+- Contains the runnable wrapper:
+  - `results_2/phospho_tail_coupling/run_phospho_tail_coupling.py`
+- Contains one system folder per analyzed system:
+  - `results_2/phospho_tail_coupling/A/`
+  - `results_2/phospho_tail_coupling/B/`
+  - `results_2/phospho_tail_coupling/F670G/`
+  - `results_2/phospho_tail_coupling/I669G/`
+  - `results_2/phospho_tail_coupling/R668G/`
+- Each system contains one or more pair folders such as `T_to_A/` or `L_to_C/`.
+- Each pair folder contains:
+  - `01_sasa/`
+    - per-frame phospho-residue SASA csv
+    - summary SASA csv
+    - phospho-residue SASA distribution png
+    - total phospho-SASA distribution png
+  - `02_tail_n_domain_contacts/`
+    - tail/N-domain contact lifetime csv
+    - per-frame contact count csv
+    - top-15 contact lifetime barplot
+    - contact-count timeseries
+  - `03_salt_bridges/`
+    - atom-level salt-bridge csv
+    - residue-level salt-bridge csv
+    - candidate `Lys/Arg` donor csv
+    - per-frame salt-bridge count csv
+    - top-15 salt-bridge lifetime barplot
+    - salt-bridge-count timeseries
+- Also contains phospho-SASA comparison folders for mutant-vs-A:
+  - `results_2/phospho_tail_coupling/A vs F670G/`
+  - `results_2/phospho_tail_coupling/A vs I669G/`
+  - `results_2/phospho_tail_coupling/A vs R668G/`
+- Each comparison folder contains:
+  - `delta_mean_sasa_A_minus_mutant.csv`
+  - `delta_mean_sasa_A_minus_mutant.png`
+- `delta_mean_sasa_A_minus_mutant.csv` stores signed deltas `A - mutant` for mean and median SASA.
+- `summary.json` stores system, pair, run, and output-path metadata for the whole phospho-tail coupling block.
+
 ## Executable Paths
 
 - Geometry/analysis module: `scripts/AllIn_geometry.py`
@@ -110,8 +161,11 @@ This repository contains code from user zarama9514.
 - DCCM module: `scripts/AllIn_DCCM.py`
 - Community module: `scripts/AllIn_community.py`
 - PSF cleaner: `scripts/AllIn_psf_cleaner.py`
+- Phospho coupling module: `scripts/AllIn_phospho_coupling.py`
 - AB combined runner: `scripts/AllIn_run_AB_combined.py`
 - MUT vs A combined runner: `scripts/AllIn_run_MUT_vs_A_combined.py`
 - RMSF v2 runner: `scripts/AllIn_run_RMSF_v2.py`
+- Phospho-tail coupling runner: `scripts/AllIn_run_phospho_tail_coupling.py`
 - RMSF v2 plotting wrapper: `results_2/RMSF_v2/plot_rmsf_v2.py`
+- Phospho-tail coupling wrapper: `results_2/phospho_tail_coupling/run_phospho_tail_coupling.py`
 - System-specific run scripts should be named by your internal system labels and added under `scripts/` when needed.
