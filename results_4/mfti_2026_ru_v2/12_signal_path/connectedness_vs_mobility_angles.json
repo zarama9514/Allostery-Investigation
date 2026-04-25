@@ -1,0 +1,82 @@
+[
+  {
+    "system": "A",
+    "path_cost": 1.2152702953380758,
+    "dccm_lig_arr": -0.19355886518227514,
+    "angle_mean_deg": 47.559124484572365,
+    "angle_std_deg": 8.618001801078368,
+    "n_frames": 680
+  },
+  {
+    "system": "B",
+    "path_cost": 1.3096147923316783,
+    "dccm_lig_arr": -0.04249607667209422,
+    "angle_mean_deg": 44.025908469660266,
+    "angle_std_deg": 7.172013144896145,
+    "n_frames": 500
+  },
+  {
+    "system": "C",
+    "path_cost": 1.6288479911108538,
+    "dccm_lig_arr": null,
+    "angle_mean_deg": 60.30791294600581,
+    "angle_std_deg": 14.532171842381434,
+    "n_frames": 500
+  },
+  {
+    "system": "C665",
+    "path_cost": 1.349692315834812,
+    "dccm_lig_arr": -0.05412610341271039,
+    "angle_mean_deg": 49.00469218971273,
+    "angle_std_deg": 14.740390730834946,
+    "n_frames": 500
+  },
+  {
+    "system": "I666G",
+    "path_cost": 0.9173085364944933,
+    "dccm_lig_arr": -0.01658474445926506,
+    "angle_mean_deg": 43.22059429232654,
+    "angle_std_deg": 5.590914567706051,
+    "n_frames": 500
+  },
+  {
+    "system": "A667G",
+    "path_cost": 1.5189898440240976,
+    "dccm_lig_arr": -0.3677517676309279,
+    "angle_mean_deg": 46.544778854512444,
+    "angle_std_deg": 12.911003469945868,
+    "n_frames": 500
+  },
+  {
+    "system": "R668G",
+    "path_cost": 1.2462024477194666,
+    "dccm_lig_arr": 0.06930320046169781,
+    "angle_mean_deg": 44.50486456656905,
+    "angle_std_deg": 10.285567877291983,
+    "n_frames": 500
+  },
+  {
+    "system": "I669G",
+    "path_cost": 1.1914688893340213,
+    "dccm_lig_arr": -0.1582135926427683,
+    "angle_mean_deg": 44.45160482928023,
+    "angle_std_deg": 7.089363819457117,
+    "n_frames": 500
+  },
+  {
+    "system": "F670G",
+    "path_cost": 1.146059460890598,
+    "dccm_lig_arr": 0.211387611611588,
+    "angle_mean_deg": 47.609506110964844,
+    "angle_std_deg": 11.968335576579317,
+    "n_frames": 500
+  },
+  {
+    "system": "TM3-6G",
+    "path_cost": 1.1342205944674835,
+    "dccm_lig_arr": -0.23839561167991422,
+    "angle_mean_deg": 45.63218478934427,
+    "angle_std_deg": 8.348638418587191,
+    "n_frames": 500
+  }
+]

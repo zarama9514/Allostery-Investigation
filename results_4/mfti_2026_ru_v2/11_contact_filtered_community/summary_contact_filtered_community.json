@@ -1,0 +1,256 @@
+{
+  "source_root": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results",
+  "out_root": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community",
+  "systems_requested": [
+    "A",
+    "B",
+    "C",
+    "C665G",
+    "I666G",
+    "A667G",
+    "R668G",
+    "I669G",
+    "F670G",
+    "TM3-6G"
+  ],
+  "systems_processed": [
+    {
+      "system_alias": "A",
+      "system_real": "A",
+      "psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\A\\A_step5_input_protein.psf",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "output": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community\\A\\community_A_contact_filtered_frame0.pdb",
+        "n_communities": 15,
+        "n_nodes": 2250,
+        "n_edges": 19040,
+        "n_frames_used": 719,
+        "threshold": 0.35,
+        "distance_cutoff_angstrom": 10.0,
+        "align_selection": "resid 571 to 825 and backbone",
+        "system_selection": "protein and name CA"
+      }
+    },
+    {
+      "system_alias": "B",
+      "system_real": "B",
+      "psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\B\\B_step5_input_protein.psf",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "output": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community\\B\\community_B_contact_filtered_frame0.pdb",
+        "n_communities": 15,
+        "n_nodes": 2882,
+        "n_edges": 24794,
+        "n_frames_used": 540,
+        "threshold": 0.35,
+        "distance_cutoff_angstrom": 10.0,
+        "align_selection": "resid 571 to 825 and backbone",
+        "system_selection": "protein and name CA"
+      }
+    },
+    {
+      "system_alias": "C",
+      "system_real": "mglu3",
+      "psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\mglu3\\mglu3_step5_input_protein.psf",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "output": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community\\C\\community_C_contact_filtered_frame0.pdb",
+        "n_communities": 12,
+        "n_nodes": 1627,
+        "n_edges": 13622,
+        "n_frames_used": 540,
+        "threshold": 0.35,
+        "distance_cutoff_angstrom": 10.0,
+        "align_selection": "resid 571 to 825 and backbone",
+        "system_selection": "protein and name CA"
+      }
+    },
+    {
+      "system_alias": "C665G",
+      "system_real": "C665G",
+      "psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\C665G\\C665G_step5_input_protein.psf",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "output": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community\\C665G\\community_C665G_contact_filtered_frame0.pdb",
+        "n_communities": 14,
+        "n_nodes": 2250,
+        "n_edges": 19475,
+        "n_frames_used": 540,
+        "threshold": 0.35,
+        "distance_cutoff_angstrom": 10.0,
+        "align_selection": "resid 571 to 825 and backbone",
+        "system_selection": "protein and name CA"
+      }
+    },
+    {
+      "system_alias": "I666G",
+      "system_real": "I666G",
+      "psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\I666G\\I666G_step5_input_protein.psf",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "output": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community\\I666G\\community_I666G_contact_filtered_frame0.pdb",
+        "n_communities": 16,
+        "n_nodes": 2250,
+        "n_edges": 19049,
+        "n_frames_used": 540,
+        "threshold": 0.35,
+        "distance_cutoff_angstrom": 10.0,
+        "align_selection": "resid 571 to 825 and backbone",
+        "system_selection": "protein and name CA"
+      }
+    },
+    {
+      "system_alias": "A667G",
+      "system_real": "A667G",
+      "psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\A667G\\A667G_step5_input_protein.psf",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "output": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community\\A667G\\community_A667G_contact_filtered_frame0.pdb",
+        "n_communities": 14,
+        "n_nodes": 2250,
+        "n_edges": 19311,
+        "n_frames_used": 540,
+        "threshold": 0.35,
+        "distance_cutoff_angstrom": 10.0,
+        "align_selection": "resid 571 to 825 and backbone",
+        "system_selection": "protein and name CA"
+      }
+    },
+    {
+      "system_alias": "R668G",
+      "system_real": "R668G",
+      "psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\R668G\\R668G_step5_input_protein.psf",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "output": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community\\R668G\\community_R668G_contact_filtered_frame0.pdb",
+        "n_communities": 14,
+        "n_nodes": 2250,
+        "n_edges": 19249,
+        "n_frames_used": 540,
+        "threshold": 0.35,
+        "distance_cutoff_angstrom": 10.0,
+        "align_selection": "resid 571 to 825 and backbone",
+        "system_selection": "protein and name CA"
+      }
+    },
+    {
+      "system_alias": "I669G",
+      "system_real": "I669G",
+      "psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\I669G\\I669G_step5_input_protein.psf",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "output": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community\\I669G\\community_I669G_contact_filtered_frame0.pdb",
+        "n_communities": 15,
+        "n_nodes": 2250,
+        "n_edges": 19027,
+        "n_frames_used": 540,
+        "threshold": 0.35,
+        "distance_cutoff_angstrom": 10.0,
+        "align_selection": "resid 571 to 825 and backbone",
+        "system_selection": "protein and name CA"
+      }
+    },
+    {
+      "system_alias": "F670G",
+      "system_real": "F670G",
+      "psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\F670G\\F670G_step5_input_protein.psf",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "output": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community\\F670G\\community_F670G_contact_filtered_frame0.pdb",
+        "n_communities": 14,
+        "n_nodes": 2250,
+        "n_edges": 19256,
+        "n_frames_used": 540,
+        "threshold": 0.35,
+        "distance_cutoff_angstrom": 10.0,
+        "align_selection": "resid 571 to 825 and backbone",
+        "system_selection": "protein and name CA"
+      }
+    },
+    {
+      "system_alias": "TM3-6G",
+      "system_real": "TM3-6G",
+      "psf": "C:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\TM3-6G\\TM3-6G_step5_input_protein.psf",
+      "runs_used": [
+        "RUN1",
+        "RUN2",
+        "RUN3",
+        "RUN4",
+        "RUN5"
+      ],
+      "output": {
+        "output_pdb": "C:\\Users\\Daniil\\IT_projects\\Allostery_Investigation\\results_4\\mfti_2026_ru_v2\\11_contact_filtered_community\\TM3-6G\\community_TM3-6G_contact_filtered_frame0.pdb",
+        "n_communities": 14,
+        "n_nodes": 2250,
+        "n_edges": 19206,
+        "n_frames_used": 540,
+        "threshold": 0.35,
+        "distance_cutoff_angstrom": 10.0,
+        "align_selection": "resid 571 to 825 and backbone",
+        "system_selection": "protein and name CA"
+      }
+    }
+  ],
+  "settings": {
+    "align_selection": "resid 571 to 825 and backbone",
+    "selection": "protein and name CA",
+    "distance_cutoff_angstrom": 10.0,
+    "threshold": 0.35,
+    "skip_first_n_frames": 100,
+    "step": 10
+  }
+}

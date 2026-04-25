@@ -1,0 +1,947 @@
+{
+  "physical_distance_cutoff_angstrom": 7.0,
+  "step": 10,
+  "skip_first_n_frames": 100,
+  "table": [
+    {
+      "system": "A",
+      "source_resid": 901,
+      "cost_B": 3.380441790411916,
+      "cost_R": 3.885880054408277,
+      "delta_R_minus_B": 0.505438263996361
+    },
+    {
+      "system": "B",
+      "source_resid": 1001,
+      "cost_B": 3.788106483829844,
+      "cost_R": 4.258893525480798,
+      "delta_R_minus_B": 0.47078704165095386
+    },
+    {
+      "system": "C",
+      "source_resid": 901,
+      "cost_B": 3.7448163550901032,
+      "cost_R": 4.422745407826217,
+      "delta_R_minus_B": 0.6779290527361139
+    },
+    {
+      "system": "C665G",
+      "source_resid": 901,
+      "cost_B": 3.5689196195430997,
+      "cost_R": 3.669478383385439,
+      "delta_R_minus_B": 0.10055876384233953
+    },
+    {
+      "system": "I666G",
+      "source_resid": 901,
+      "cost_B": 2.567046399558551,
+      "cost_R": 2.6566976217806895,
+      "delta_R_minus_B": 0.0896512222221384
+    },
+    {
+      "system": "A667G",
+      "source_resid": 901,
+      "cost_B": 4.3018186845605495,
+      "cost_R": 4.29226171735443,
+      "delta_R_minus_B": -0.009556967206119538
+    },
+    {
+      "system": "R668G",
+      "source_resid": 901,
+      "cost_B": 3.641325029665364,
+      "cost_R": 3.195560521245036,
+      "delta_R_minus_B": -0.4457645084203281
+    },
+    {
+      "system": "I669G",
+      "source_resid": 901,
+      "cost_B": 3.4797795758569556,
+      "cost_R": 2.6812633052992805,
+      "delta_R_minus_B": -0.7985162705576752
+    },
+    {
+      "system": "F670G",
+      "source_resid": 901,
+      "cost_B": 3.3231465864213496,
+      "cost_R": 4.6157080915906405,
+      "delta_R_minus_B": 1.292561505169291
+    },
+    {
+      "system": "TM3-6G",
+      "source_resid": 901,
+      "cost_B": 2.4781148294351216,
+      "cost_R": 2.045868210344209,
+      "delta_R_minus_B": -0.43224661909091244
+    }
+  ],
+  "system_B": {
+    "protomer_B": {
+      "psf": "c:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\B\\B_step5_input_protein.psf",
+      "dcd": "c:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\B\\B_step7_productionRUN1.nowat.dcd",
+      "source_resid": 1001,
+      "target_selection": "resid 671 to 685 and segid B",
+      "selection": "(protein and name CA) or (resname SEP TPO SP1 TP1 and name CA) or (resid 856 857 859 860 and name CA)",
+      "align_selection": "resid 570 to 830 and backbone",
+      "threshold": 0.35,
+      "distance_cutoff_angstrom": 10.0,
+      "physical_distance_cutoff_angstrom": 7.0,
+      "interface_distance_cutoff_angstrom": null,
+      "graph_mode": "physical",
+      "n_nodes": 2890,
+      "n_edges": 11062,
+      "n_frames_used": 100,
+      "source_nodes": [
+        {
+          "index": 2888,
+          "resid": 1001,
+          "segid": "G",
+          "resname": "GLU",
+          "atomname": "CA"
+        },
+        {
+          "index": 2889,
+          "resid": 1001,
+          "segid": "E",
+          "resname": "GLU",
+          "atomname": "CA"
+        }
+      ],
+      "target_nodes": [
+        {
+          "index": 1458,
+          "resid": 671,
+          "segid": "B",
+          "resname": "ASP",
+          "atomname": "CA"
+        },
+        {
+          "index": 1459,
+          "resid": 672,
+          "segid": "B",
+          "resname": "GLY",
+          "atomname": "CA"
+        },
+        {
+          "index": 1460,
+          "resid": 673,
+          "segid": "B",
+          "resname": "VAL",
+          "atomname": "CA"
+        },
+        {
+          "index": 1461,
+          "resid": 674,
+          "segid": "B",
+          "resname": "LYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 1462,
+          "resid": 675,
+          "segid": "B",
+          "resname": "ASN",
+          "atomname": "CA"
+        },
+        {
+          "index": 1463,
+          "resid": 676,
+          "segid": "B",
+          "resname": "GLY",
+          "atomname": "CA"
+        },
+        {
+          "index": 1464,
+          "resid": 677,
+          "segid": "B",
+          "resname": "ALA",
+          "atomname": "CA"
+        },
+        {
+          "index": 1465,
+          "resid": 678,
+          "segid": "B",
+          "resname": "GLN",
+          "atomname": "CA"
+        },
+        {
+          "index": 1466,
+          "resid": 679,
+          "segid": "B",
+          "resname": "ARG",
+          "atomname": "CA"
+        },
+        {
+          "index": 1467,
+          "resid": 680,
+          "segid": "B",
+          "resname": "PRO",
+          "atomname": "CA"
+        },
+        {
+          "index": 1468,
+          "resid": 681,
+          "segid": "B",
+          "resname": "LYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 1469,
+          "resid": 682,
+          "segid": "B",
+          "resname": "PHE",
+          "atomname": "CA"
+        },
+        {
+          "index": 1470,
+          "resid": 683,
+          "segid": "B",
+          "resname": "ILE",
+          "atomname": "CA"
+        },
+        {
+          "index": 1471,
+          "resid": 684,
+          "segid": "B",
+          "resname": "SER",
+          "atomname": "CA"
+        },
+        {
+          "index": 1472,
+          "resid": 685,
+          "segid": "B",
+          "resname": "PRO",
+          "atomname": "CA"
+        }
+      ],
+      "best_source_index": 2889,
+      "best_target_index": 1471,
+      "best_path_indices": [
+        2889,
+        1064,
+        1063,
+        1062,
+        1061,
+        1060,
+        1059,
+        1058,
+        1294,
+        1295,
+        1296,
+        1315,
+        1316,
+        1307,
+        1331,
+        1332,
+        1333,
+        1334,
+        1336,
+        1340,
+        1339,
+        1513,
+        1503,
+        1502,
+        1501,
+        1500,
+        1499,
+        1494,
+        1491,
+        1487,
+        1484,
+        1480,
+        1479,
+        1475,
+        1471
+      ],
+      "best_path_cost": 3.788106483829844,
+      "best_path_length": 34,
+      "best_path_nodes": [
+        {
+          "index": 2889,
+          "resid": 1001,
+          "segid": "E",
+          "resname": "GLU",
+          "atomname": "CA"
+        },
+        {
+          "index": 1064,
+          "resid": 277,
+          "segid": "B",
+          "resname": "ARG",
+          "atomname": "CA"
+        },
+        {
+          "index": 1063,
+          "resid": 276,
+          "segid": "B",
+          "resname": "MET",
+          "atomname": "CA"
+        },
+        {
+          "index": 1062,
+          "resid": 275,
+          "segid": "B",
+          "resname": "PHE",
+          "atomname": "CA"
+        },
+        {
+          "index": 1061,
+          "resid": 274,
+          "segid": "B",
+          "resname": "LEU",
+          "atomname": "CA"
+        },
+        {
+          "index": 1060,
+          "resid": 273,
+          "segid": "B",
+          "resname": "VAL",
+          "atomname": "CA"
+        },
+        {
+          "index": 1059,
+          "resid": 272,
+          "segid": "B",
+          "resname": "VAL",
+          "atomname": "CA"
+        },
+        {
+          "index": 1058,
+          "resid": 271,
+          "segid": "B",
+          "resname": "VAL",
+          "atomname": "CA"
+        },
+        {
+          "index": 1294,
+          "resid": 507,
+          "segid": "B",
+          "resname": "SER",
+          "atomname": "CA"
+        },
+        {
+          "index": 1295,
+          "resid": 508,
+          "segid": "B",
+          "resname": "GLN",
+          "atomname": "CA"
+        },
+        {
+          "index": 1296,
+          "resid": 509,
+          "segid": "B",
+          "resname": "CYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 1315,
+          "resid": 528,
+          "segid": "B",
+          "resname": "CYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 1316,
+          "resid": 529,
+          "segid": "B",
+          "resname": "TRP",
+          "atomname": "CA"
+        },
+        {
+          "index": 1307,
+          "resid": 520,
+          "segid": "B",
+          "resname": "ASN",
+          "atomname": "CA"
+        },
+        {
+          "index": 1331,
+          "resid": 544,
+          "segid": "B",
+          "resname": "PHE",
+          "atomname": "CA"
+        },
+        {
+          "index": 1332,
+          "resid": 545,
+          "segid": "B",
+          "resname": "THR",
+          "atomname": "CA"
+        },
+        {
+          "index": 1333,
+          "resid": 546,
+          "segid": "B",
+          "resname": "CYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 1334,
+          "resid": 547,
+          "segid": "B",
+          "resname": "MET",
+          "atomname": "CA"
+        },
+        {
+          "index": 1336,
+          "resid": 549,
+          "segid": "B",
+          "resname": "CYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 1340,
+          "resid": 553,
+          "segid": "B",
+          "resname": "GLN",
+          "atomname": "CA"
+        },
+        {
+          "index": 1339,
+          "resid": 552,
+          "segid": "B",
+          "resname": "GLY",
+          "atomname": "CA"
+        },
+        {
+          "index": 1513,
+          "resid": 726,
+          "segid": "B",
+          "resname": "VAL",
+          "atomname": "CA"
+        },
+        {
+          "index": 1503,
+          "resid": 716,
+          "segid": "B",
+          "resname": "ARG",
+          "atomname": "CA"
+        },
+        {
+          "index": 1502,
+          "resid": 715,
+          "segid": "B",
+          "resname": "ARG",
+          "atomname": "CA"
+        },
+        {
+          "index": 1501,
+          "resid": 714,
+          "segid": "B",
+          "resname": "THR",
+          "atomname": "CA"
+        },
+        {
+          "index": 1500,
+          "resid": 713,
+          "segid": "B",
+          "resname": "GLY",
+          "atomname": "CA"
+        },
+        {
+          "index": 1499,
+          "resid": 712,
+          "segid": "B",
+          "resname": "PRO",
+          "atomname": "CA"
+        },
+        {
+          "index": 1494,
+          "resid": 707,
+          "segid": "B",
+          "resname": "LEU",
+          "atomname": "CA"
+        },
+        {
+          "index": 1491,
+          "resid": 704,
+          "segid": "B",
+          "resname": "SER",
+          "atomname": "CA"
+        },
+        {
+          "index": 1487,
+          "resid": 700,
+          "segid": "B",
+          "resname": "ILE",
+          "atomname": "CA"
+        },
+        {
+          "index": 1484,
+          "resid": 697,
+          "segid": "B",
+          "resname": "LEU",
+          "atomname": "CA"
+        },
+        {
+          "index": 1480,
+          "resid": 693,
+          "segid": "B",
+          "resname": "LEU",
+          "atomname": "CA"
+        },
+        {
+          "index": 1479,
+          "resid": 692,
+          "segid": "B",
+          "resname": "CYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 1475,
+          "resid": 688,
+          "segid": "B",
+          "resname": "GLN",
+          "atomname": "CA"
+        },
+        {
+          "index": 1471,
+          "resid": 684,
+          "segid": "B",
+          "resname": "SER",
+          "atomname": "CA"
+        }
+      ],
+      "path_found": true,
+      "system": "B",
+      "protomer": "B"
+    },
+    "protomer_R": {
+      "psf": "c:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\B\\B_step5_input_protein.psf",
+      "dcd": "c:\\Users\\Daniil\\IT_projects\\Mika_project\\results\\B\\B_step7_productionRUN1.nowat.dcd",
+      "source_resid": 1001,
+      "target_selection": "resid 671 to 685 and segid R",
+      "selection": "(protein and name CA) or (resname SEP TPO SP1 TP1 and name CA) or (resid 856 857 859 860 and name CA)",
+      "align_selection": "resid 570 to 830 and backbone",
+      "threshold": 0.35,
+      "distance_cutoff_angstrom": 10.0,
+      "physical_distance_cutoff_angstrom": 7.0,
+      "interface_distance_cutoff_angstrom": null,
+      "graph_mode": "physical",
+      "n_nodes": 2890,
+      "n_edges": 11062,
+      "n_frames_used": 100,
+      "source_nodes": [
+        {
+          "index": 2888,
+          "resid": 1001,
+          "segid": "G",
+          "resname": "GLU",
+          "atomname": "CA"
+        },
+        {
+          "index": 2889,
+          "resid": 1001,
+          "segid": "E",
+          "resname": "GLU",
+          "atomname": "CA"
+        }
+      ],
+      "target_nodes": [
+        {
+          "index": 641,
+          "resid": 671,
+          "segid": "R",
+          "resname": "ASP",
+          "atomname": "CA"
+        },
+        {
+          "index": 642,
+          "resid": 672,
+          "segid": "R",
+          "resname": "GLY",
+          "atomname": "CA"
+        },
+        {
+          "index": 643,
+          "resid": 673,
+          "segid": "R",
+          "resname": "VAL",
+          "atomname": "CA"
+        },
+        {
+          "index": 644,
+          "resid": 674,
+          "segid": "R",
+          "resname": "LYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 645,
+          "resid": 675,
+          "segid": "R",
+          "resname": "ASN",
+          "atomname": "CA"
+        },
+        {
+          "index": 646,
+          "resid": 676,
+          "segid": "R",
+          "resname": "GLY",
+          "atomname": "CA"
+        },
+        {
+          "index": 647,
+          "resid": 677,
+          "segid": "R",
+          "resname": "ALA",
+          "atomname": "CA"
+        },
+        {
+          "index": 648,
+          "resid": 678,
+          "segid": "R",
+          "resname": "GLN",
+          "atomname": "CA"
+        },
+        {
+          "index": 649,
+          "resid": 679,
+          "segid": "R",
+          "resname": "ARG",
+          "atomname": "CA"
+        },
+        {
+          "index": 650,
+          "resid": 680,
+          "segid": "R",
+          "resname": "PRO",
+          "atomname": "CA"
+        },
+        {
+          "index": 651,
+          "resid": 681,
+          "segid": "R",
+          "resname": "LYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 652,
+          "resid": 682,
+          "segid": "R",
+          "resname": "PHE",
+          "atomname": "CA"
+        },
+        {
+          "index": 653,
+          "resid": 683,
+          "segid": "R",
+          "resname": "ILE",
+          "atomname": "CA"
+        },
+        {
+          "index": 654,
+          "resid": 684,
+          "segid": "R",
+          "resname": "SER",
+          "atomname": "CA"
+        },
+        {
+          "index": 655,
+          "resid": 685,
+          "segid": "R",
+          "resname": "PRO",
+          "atomname": "CA"
+        }
+      ],
+      "best_source_index": 2888,
+      "best_target_index": 641,
+      "best_path_indices": [
+        2888,
+        121,
+        192,
+        193,
+        187,
+        186,
+        185,
+        184,
+        212,
+        497,
+        498,
+        499,
+        490,
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        523,
+        535,
+        536,
+        537,
+        698,
+        684,
+        682,
+        677,
+        674,
+        670,
+        667,
+        666,
+        627,
+        630,
+        633,
+        637,
+        641
+      ],
+      "best_path_cost": 4.258893525480798,
+      "best_path_length": 35,
+      "best_path_nodes": [
+        {
+          "index": 2888,
+          "resid": 1001,
+          "segid": "G",
+          "resname": "GLU",
+          "atomname": "CA"
+        },
+        {
+          "index": 121,
+          "resid": 151,
+          "segid": "R",
+          "resname": "SER",
+          "atomname": "CA"
+        },
+        {
+          "index": 192,
+          "resid": 222,
+          "segid": "R",
+          "resname": "TYR",
+          "atomname": "CA"
+        },
+        {
+          "index": 193,
+          "resid": 223,
+          "segid": "R",
+          "resname": "GLY",
+          "atomname": "CA"
+        },
+        {
+          "index": 187,
+          "resid": 217,
+          "segid": "R",
+          "resname": "ALA",
+          "atomname": "CA"
+        },
+        {
+          "index": 186,
+          "resid": 216,
+          "segid": "R",
+          "resname": "VAL",
+          "atomname": "CA"
+        },
+        {
+          "index": 185,
+          "resid": 215,
+          "segid": "R",
+          "resname": "THR",
+          "atomname": "CA"
+        },
+        {
+          "index": 184,
+          "resid": 214,
+          "segid": "R",
+          "resname": "SER",
+          "atomname": "CA"
+        },
+        {
+          "index": 212,
+          "resid": 242,
+          "segid": "R",
+          "resname": "ALA",
+          "atomname": "CA"
+        },
+        {
+          "index": 497,
+          "resid": 527,
+          "segid": "R",
+          "resname": "CYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 498,
+          "resid": 528,
+          "segid": "R",
+          "resname": "CYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 499,
+          "resid": 529,
+          "segid": "R",
+          "resname": "TRP",
+          "atomname": "CA"
+        },
+        {
+          "index": 490,
+          "resid": 520,
+          "segid": "R",
+          "resname": "ASN",
+          "atomname": "CA"
+        },
+        {
+          "index": 514,
+          "resid": 544,
+          "segid": "R",
+          "resname": "PHE",
+          "atomname": "CA"
+        },
+        {
+          "index": 515,
+          "resid": 545,
+          "segid": "R",
+          "resname": "THR",
+          "atomname": "CA"
+        },
+        {
+          "index": 516,
+          "resid": 546,
+          "segid": "R",
+          "resname": "CYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 517,
+          "resid": 547,
+          "segid": "R",
+          "resname": "MET",
+          "atomname": "CA"
+        },
+        {
+          "index": 518,
+          "resid": 548,
+          "segid": "R",
+          "resname": "ASP",
+          "atomname": "CA"
+        },
+        {
+          "index": 519,
+          "resid": 549,
+          "segid": "R",
+          "resname": "CYS",
+          "atomname": "CA"
+        },
+        {
+          "index": 523,
+          "resid": 553,
+          "segid": "R",
+          "resname": "GLN",
+          "atomname": "CA"
+        },
+        {
+          "index": 535,
+          "resid": 565,
+          "segid": "R",
+          "resname": "LEU",
+          "atomname": "CA"
+        },
+        {
+          "index": 536,
+          "resid": 566,
+          "segid": "R",
+          "resname": "PRO",
+          "atomname": "CA"
+        },
+        {
+          "index": 537,
+          "resid": 567,
+          "segid": "R",
+          "resname": "GLU",
+          "atomname": "CA"
+        },
+        {
+          "index": 698,
+          "resid": 728,
+          "segid": "R",
+          "resname": "LEU",
+          "atomname": "CA"
+        },
+        {
+          "index": 684,
+          "resid": 714,
+          "segid": "R",
+          "resname": "THR",
+          "atomname": "CA"
+        },
+        {
+          "index": 682,
+          "resid": 712,
+          "segid": "R",
+          "resname": "PRO",
+          "atomname": "CA"
+        },
+        {
+          "index": 677,
+          "resid": 707,
+          "segid": "R",
+          "resname": "LEU",
+          "atomname": "CA"
+        },
+        {
+          "index": 674,
+          "resid": 704,
+          "segid": "R",
+          "resname": "SER",
+          "atomname": "CA"
+        },
+        {
+          "index": 670,
+          "resid": 700,
+          "segid": "R",
+          "resname": "ILE",
+          "atomname": "CA"
+        },
+        {
+          "index": 667,
+          "resid": 697,
+          "segid": "R",
+          "resname": "LEU",
+          "atomname": "CA"
+        },
+        {
+          "index": 666,
+          "resid": 696,
+          "segid": "R",
+          "resname": "ILE",
+          "atomname": "CA"
+        },
+        {
+          "index": 627,
+          "resid": 657,
+          "segid": "R",
+          "resname": "SER",
+          "atomname": "CA"
+        },
+        {
+          "index": 630,
+          "resid": 660,
+          "segid": "R",
+          "resname": "LEU",
+          "atomname": "CA"
+        },
+        {
+          "index": 633,
+          "resid": 663,
+          "segid": "R",
+          "resname": "THR",
+          "atomname": "CA"
+        },
+        {
+          "index": 637,
+          "resid": 667,
+          "segid": "R",
+          "resname": "ALA",
+          "atomname": "CA"
+        },
+        {
+          "index": 641,
+          "resid": 671,
+          "segid": "R",
+          "resname": "ASP",
+          "atomname": "CA"
+        }
+      ],
+      "path_found": true,
+      "system": "B",
+      "protomer": "R"
+    }
+  }
+}

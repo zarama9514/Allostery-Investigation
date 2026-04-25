@@ -1,0 +1,75 @@
+{
+  "table": [
+    {
+      "system": "A",
+      "protomer": "protomer_B",
+      "source_resid": 901,
+      "path_cost": 2.6019742097540495,
+      "bridge_used": false,
+      "bridge_count": 0,
+      "path_length": 28,
+      "arrestin_state": "with_arrestin"
+    },
+    {
+      "system": "A",
+      "protomer": "protomer_R",
+      "source_resid": 901,
+      "path_cost": 3.0046558239537218,
+      "bridge_used": false,
+      "bridge_count": 0,
+      "path_length": 28,
+      "arrestin_state": "with_arrestin"
+    },
+    {
+      "system": "B",
+      "protomer": "protomer_B",
+      "source_resid": 1001,
+      "path_cost": 3.0691866807539205,
+      "bridge_used": false,
+      "bridge_count": 0,
+      "path_length": 23,
+      "arrestin_state": "with_arrestin",
+      "local_dccm_mean_edge": 0.8604915145111853
+    },
+    {
+      "system": "B",
+      "protomer": "protomer_R",
+      "source_resid": 1001,
+      "path_cost": 3.497963957810591,
+      "bridge_used": true,
+      "bridge_count": 1,
+      "path_length": 30,
+      "arrestin_state": "with_arrestin",
+      "local_dccm_mean_edge": 0.8793805531789451
+    },
+    {
+      "system": "C",
+      "protomer": "protomer_B",
+      "source_resid": 901,
+      "path_cost": 2.9514446410379707,
+      "bridge_used": false,
+      "bridge_count": 0,
+      "path_length": 27,
+      "arrestin_state": "without_arrestin"
+    },
+    {
+      "system": "C",
+      "protomer": "protomer_R",
+      "source_resid": 901,
+      "path_cost": 3.5451035513630766,
+      "bridge_used": false,
+      "bridge_count": 0,
+      "path_length": 27,
+      "arrestin_state": "without_arrestin"
+    }
+  ],
+  "system_B_effective": {
+    "protomer": "protomer_B",
+    "cost": 3.0691866807539205
+  },
+  "system_B_ineffective": {
+    "protomer": "protomer_R",
+    "cost": 3.497963957810591
+  },
+  "bridge_rule": "665-670 is not mandatory if bridge_used is false; if true, it is a transit chain but not a structural break"
+}

@@ -1,0 +1,19 @@
+{
+  "results_root": "../results_4/mfti_2026_ru_v2/08_phospho_tail_coupling",
+  "systems": [],
+  "run_exclusions": {
+    "mglu3": [
+      "RUN5"
+    ],
+    "TM3-6G": [
+      "RUN2",
+      "RUN3"
+    ]
+  },
+  "skip_first_n_frames_per_run": 200,
+  "step": 25,
+  "tail_segid": "T",
+  "sasa_surface_points": 120,
+  "workers": 0,
+  "threads_per_worker": 1
+}
